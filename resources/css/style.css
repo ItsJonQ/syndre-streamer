@@ -1,0 +1,195 @@
+html,
+body {
+	background: black;
+	font-family: 'roboto condensed';
+	height: 100%;
+	margin: 0;
+	padding: 0;
+	position: relative;
+	width: 100%;
+}
+
+.header {
+	background: black;
+	color: white;
+	font-size: 18px;
+	left: 0;
+	overflow: hidden;
+	padding: 5px 10px;
+	position: fixed;
+	text-transform: uppercase;
+	top: 0;
+	width: 100%;
+	border-bottom: 1px solid #333;
+}
+
+.header-elements {
+	overflow: hidden;
+}
+
+.logo span {
+	color: orangered;
+}
+
+.the-menu,
+.the-logo,
+.watching {
+	float: left;
+}
+
+.the-menu {
+	padding: 2px 0px;
+	margin-right: 10px;
+}
+
+.the-logo {
+	margin-right: 10px;
+}
+
+.watching {
+	color: #777;
+	font-size: 11px;
+	line-height: 25px;
+	padding: 0px 0px;
+}
+
+.watching .streamer {
+	color: orangered;
+	margin-left: 3px;
+}
+
+.watching .title {
+	color: #ccc;
+}
+
+.noclick {
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	z-index: 3;
+	bottom: 50px;
+	left: 0px;
+}
+
+#livestream {
+	bottom: 0;
+	left: 0;
+	margin: 0 auto;
+	position: absolute;
+	right: 0;
+	top: 36px;
+}
+
+#livestream object {
+	width: 100%;
+	height: 100%;
+}
+
+#streamer-list  {
+	font-family: 'roboto condensed';
+	font-size: 12px;
+	left: 0;
+	margin: 0;
+	padding: 0;
+	position: fixed;
+	text-transform: uppercase;
+	top: 36px;
+	z-index: 9999;
+}
+
+#streamer-list.scroll ul {
+	padding-right: 10px;
+}
+
+#streamer-list ul {
+	background: rgba(0,0,0,0.8);
+	border-right: 1px solid rgba(255,255,255,0.4);
+	color: white;
+	cursor: pointer;
+	list-style: none;
+	overflow: hidden;
+	overflow-y: auto;
+	margin: 0;
+	padding: 0;
+	position: relative;
+	opacity: 0.5;
+}
+
+#streamer-list li {
+	display: none;
+	line-height: 1;
+	padding: 10px 15px;
+}
+
+#streamer-list li .view-count {
+	display: none;
+}
+
+#streamer-list.active {
+	height: 100%;
+}
+
+#streamer-list.active li {
+	display: block;
+}
+
+#streamer-list:hover ul,
+#streamer-list.active ul {
+	opacity: 1;
+}
+
+#streamer-list.active ul {
+	min-width: 200px;
+}
+
+#streamer-list.active li.selected {
+	color: orangered;
+}
+
+#streamer-list.active li:hover {
+	background: orangered;
+	color: white;
+}
+
+#streamer-list li.selected {
+	color: white;
+}
+
+#streamer-search {
+	background: rgba(0,0,0,0.8);
+	width: 400px;
+	height: 200px;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	margin: -100px 0px 0px -200px;
+	display: none;
+	z-index: 99;
+}
+
+#streamer-watching {
+	background: black;
+	color: white;
+	display: none;
+	font-size: 32px;
+	left: 50%;
+	margin: -110px 0px 0px -250px;
+	position: fixed;
+	top: 50%;
+	width: 400px;
+	z-index: 99;
+	padding: 50px;
+	text-align: center;
+	text-transform: uppercase;
+}
+
+#streamer-watching span {
+	color: orangered;
+	display: block;
+	line-height: 38px;
+}
+
+#streamer-watching span.title {
+	color: #ddd;
+	font-size: 13px;
+}
