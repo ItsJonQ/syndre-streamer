@@ -16,6 +16,7 @@ $(document).ready(function(){
 		streamWrap = $('#stream-wrapper');
 		streamerList = $('#streamer-list');
 		streamerLi = streamerList.find('li');
+		streamerListW = 200;
 		streamArea = $('#livestream');
 		theSidebar = $('#sidebar');
 		streamWatching = $('#streamer-watching');
@@ -120,7 +121,7 @@ $(document).ready(function(){
 			streamWrap.animate({ top: '0px'}, idleActionTime);
 			streamArea.animate({ bottom: '-30px'}, idleActionTime);
 			if(streamerList.hasClass('active')) {
-				streamerList.animate({ width: '0px'}, idleActionTime);
+				streamerList.animate({ left: -(streamerListW+1) }, idleActionTime);
 			}
 		}
 
@@ -129,7 +130,7 @@ $(document).ready(function(){
 			streamWrap.animate({ top: '36px'}, idleActionTime);
 			streamArea.animate({ bottom: '0px'}, idleActionTime);
 			if(streamerList.hasClass('active')) {
-				streamerList.animate({ width: '200px'}, idleActionTime);
+				streamerList.animate({ left: 0 }, idleActionTime);
 			}
 		}
 
@@ -242,7 +243,7 @@ $(document).ready(function(){
 						if(e.keyCode == 37 || e.keyCode == 65) {
 							// streamListUserReset();
 							iconMenu.toggleClass('active-on');
-							streamerList.removeClass('active scroll');
+							streamerList.removeClass('active scroll').css('left', 0);
 						}
 
 					// "Enter" / "E" to Activate Selected User's Stream
