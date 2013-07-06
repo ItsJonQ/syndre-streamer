@@ -101,7 +101,6 @@ $(document).ready(function(){
 					// "Left" / "A" to Hide Stream Menu
 						if(e.keyCode == 37 || e.keyCode == 65) {
 							streamerList.removeClass('active scroll');
-							streamerList.find('ul').height('auto');
 						}
 
 					// "C" for Chat
