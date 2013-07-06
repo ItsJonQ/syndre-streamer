@@ -2,7 +2,6 @@ $(document).ready(function(){
 
 	debugMode = false;
 	var initialLoadTime = new Date();
-	var idleTimeout = 3000;
 
 	// Debug Mode
 		// debugMode = true; // Uncomment This to Activate Debug Mode
@@ -119,7 +118,25 @@ $(document).ready(function(){
 
 		var idleActionTime = 300;
 
-		fullscreenActivate  = function() {
+		chatTrigger = function() {
+			var sa = 'sidebar-active';
+			var saNum = 301;
+			var fsNum = 15;
+			iconChat.toggleClass('active-on');
+			streamWrap.toggleClass(sa);
+			theSidebar.toggleClass('hidden');
+			if(streamWrap.hasClass(sa)) {
+				fsTrigger.css('right', saNum + fsNum);
+				console.log('yes');
+			} else {
+				fsTrigger.css('right', fsNum);
+				console.log('no');
+			}
+		}
+
+		fullscreenActivate = function() {
+			fsTrigger.addClass('activate');
+			streamWrap.addClass('fullscreen-mode');
 			theHeader.animate({ height: '0px'}, idleActionTime-100);
 			streamWrap.animate({ top: '0px'}, idleActionTime);
 			streamArea.animate({ bottom: '-30px'}, idleActionTime);
@@ -130,6 +147,8 @@ $(document).ready(function(){
 		}
 
 		fullscreenDectivate = function() {
+			fsTrigger.removeClass('activate');
+			streamWrap.removeClass('fullscreen-mode');
 			theHeader.animate({ height: '35px'}, idleActionTime-100);
 			streamWrap.animate({ top: '36px'}, idleActionTime);
 			streamArea.animate({ bottom: '0px'}, idleActionTime);
@@ -140,15 +159,10 @@ $(document).ready(function(){
 		}
 
 		fullscreenTrigger = function() {
-			var t = fsTrigger;
 			if(!streamWrap.hasClass('fullscreen-mode')) {
-				t.addClass('activate');
-				streamWrap.addClass('fullscreen-mode');
 				fullscreenActivate();
 				console.log('Fullscreen mode activated.');
-			} else {
-				t.removeClass('activate');
-				streamWrap.removeClass('fullscreen-mode');
+			} else {			
 				fullscreenDectivate();
 				console.log('Fullscreen mode dectivated.');
 			}
@@ -278,11 +292,7 @@ $(document).ready(function(){
 
 					// "C" for Chat
 						if(e.keyCode == 67) {
-							var sa = 'sidebar-active';
-							var tc = $('.twitch-chat');
-							iconChat.toggleClass('active-on');
-							streamWrap.toggleClass('sidebar-active');
-							theSidebar.toggleClass('hidden');						
+							chatTrigger();			
 						}
 
 					// "R" for Refresh List
@@ -342,9 +352,7 @@ $(document).ready(function(){
 		});
 
 		iconChat.on('click',function(){
-			$(this).toggleClass('active-on');
-			streamWrap.toggleClass('sidebar-active');
-			theSidebar.toggleClass('hidden');
+			chatTrigger();
 		});
 
 		iconFS.on('click',function() {
@@ -354,21 +362,24 @@ $(document).ready(function(){
 		// exitPage();
 
 	// Idle Functions
+		var idleActive = false;
+		// var idleActive = true;
+		if(idleActive == true) {
+			var idleTimeout = 10000;
+			$(document).bind("idle.idleTimer", function(){
+				fullscreenActivate();
+				if(debugMode == true) {
+					console.log('User is now idle.');	
+				}
+	        });
 
-		$(document).bind("idle.idleTimer", function(){
-			// fullscreenActivate();
-			if(debugMode == true) {
-				console.log('User is now idle.');	
-			}
-        });
-
-        $(document).bind("active.idleTimer", function(){
-        	// fullscreenDeactive();
-			if(debugMode == true) {
-				console.log('User is now active.');	
-			}
-        });
-        
+	        $(document).bind("active.idleTimer", function(){
+	        	fullscreenDeactive();
+				if(debugMode == true) {
+					console.log('User is now active.');	
+				}
+	        });			
+		}
         $.idleTimer(idleTimeout);
 
 });
