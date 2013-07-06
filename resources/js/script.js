@@ -116,7 +116,7 @@ $(document).ready(function(){
 			});
 		}
 
-		var idleActionTime = 300;
+		var fsActionTime = 200;
 
 		chatTrigger = function() {
 			var sa = 'sidebar-active';
@@ -137,24 +137,24 @@ $(document).ready(function(){
 		fullscreenActivate = function() {
 			fsTrigger.addClass('activate');
 			streamWrap.addClass('fullscreen-mode');
-			theHeader.animate({ height: '0px'}, idleActionTime-100);
-			streamWrap.animate({ top: '0px'}, idleActionTime);
-			streamArea.animate({ bottom: '-30px'}, idleActionTime);
-			fsTrigger.animate({ bottom: '15px'}, idleActionTime);
+			theHeader.animate({ height: '0px'}, fsActionTime-100);
+			streamWrap.animate({ top: '0px'}, fsActionTime);
+			streamArea.animate({ bottom: '-30px'}, fsActionTime);
+			fsTrigger.animate({ bottom: '15px'}, fsActionTime);
 			if(streamerList.hasClass('active')) {
-				streamerList.animate({ left: -(streamerListW+1) }, idleActionTime);
+				streamerList.animate({ left: -(streamerListW+1) }, fsActionTime);
 			}
 		}
 
 		fullscreenDectivate = function() {
 			fsTrigger.removeClass('activate');
 			streamWrap.removeClass('fullscreen-mode');
-			theHeader.animate({ height: '35px'}, idleActionTime-100);
-			streamWrap.animate({ top: '36px'}, idleActionTime);
-			streamArea.animate({ bottom: '0px'}, idleActionTime);
-			fsTrigger.animate({ bottom: '30px'}, idleActionTime);
+			theHeader.animate({ height: '35px'}, fsActionTime-100);
+			streamWrap.animate({ top: '36px'}, fsActionTime);
+			streamArea.animate({ bottom: '0px'}, fsActionTime);
+			fsTrigger.animate({ bottom: '30px'}, fsActionTime);
 			if(streamerList.hasClass('active')) {
-				streamerList.animate({ left: 0 }, idleActionTime);
+				streamerList.animate({ left: 0 }, fsActionTime);
 			}
 		}
 
