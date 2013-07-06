@@ -9,6 +9,18 @@ body {
 	width: 100%;
 }
 
+body {
+	overflow: hidden;
+}
+
+.left {
+	float: left;
+}
+
+.right {
+	float: right;
+}
+
 .hidden {
 	display: none;
 }
@@ -17,22 +29,27 @@ body {
 	color: orangered;
 }
 
+.action {
+	cursor: pointer;
+}
+
 .header {
 	background: black;
+	border-bottom: 1px solid #333;
 	color: white;
 	font-size: 18px;
+	height: 35px;
 	left: 0;
 	overflow: hidden;
-	padding: 5px 10px;
 	position: fixed;
 	text-transform: uppercase;
 	top: 0;
 	width: 100%;
-	border-bottom: 1px solid #333;
 }
 
 .header-elements {
 	overflow: hidden;
+	padding: 5px 10px;
 }
 
 .the-menu,
@@ -53,8 +70,11 @@ body {
 .watching {
 	color: #777;
 	font-size: 11px;
+	height: 24px;
 	line-height: 25px;
 	padding: 0px 0px;
+	max-width: 520px;
+	overflow: hidden;
 }
 
 .watching .streamer {
@@ -63,6 +83,20 @@ body {
 
 .watching .title {
 	color: #ccc;
+	position: relative;
+}
+
+.header .icons-options .option {
+	color: #666;
+	font-size: 14px;
+	height: 16px;
+	line-height: 1em;
+	margin: 5px 0px 0px 5px;
+	width: 16px;
+}
+
+.header .icons-options .option.active-on {
+	color: #fff;
 }
 
 .noclick {
@@ -192,7 +226,7 @@ body {
 	margin: 0 auto;
 	position: absolute;
 	right: 0;
-	top: 36px;
+	top: 0px;
 }
 
 #livestream object {
@@ -218,6 +252,7 @@ body {
 }
 
 #sidebar .widget-header {
+	background: black;
 	color: #ddd;
 	font-size: 14px;
 	line-height: 1.2em;
@@ -240,4 +275,10 @@ body {
 
 #stream-wrapper.sidebar-active #livestream {
 	right: 301px;
+}
+
+@media all and (max-width : 680px) {
+	.watching .title {
+		display: none;
+	}
 }

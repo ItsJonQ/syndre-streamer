@@ -12,17 +12,24 @@
 <body>
 	<div id="header" class="logo header">
 		<div class="header-elements">
-			<div class="the-menu"><i class="icon-menu-2"></i></div>
-			<div class="the-logo"><span class="highlight-text">Syndre</span> Beta</div>
+			<div class="the-menu action"><i class="icon-menu-2"></i></div>
+			<div class="the-logo action"><span class="highlight-text">Syndre</span> Beta</div>
 			<div class="watching">Now Watching</div>
+			<div class="icons-options right">
+				<div class="option chat action"><i class="icon-bubble"></i></div>
+			</div>	
 		</div>
 	</div>
-	<div id="stream-wrapper">
+	<div id="stream-wrapper" class="stream-wrapper">
 		<div id="streamer-list">
 			<ul></ul>
 		</div>
 		<div id="livestream" class="livestream-viewer"></div>
 		<div id="sidebar" class="hidden">
+			<div class="twitch-chat side-widget">
+				<div class="chat-header widget-header">Twitch Chat</div>
+				<div class="widget-body"></div>
+			</div>
 		</div>
 	</div>
 	<div id="streamer-watching"></div>
