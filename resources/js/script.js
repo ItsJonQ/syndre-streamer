@@ -24,6 +24,11 @@ $(document).ready(function(){
 				if(currentUser.length) {
 					streamerList.find('.'+currentUser).addClass('selected');
 				}
+				$('#streamer-list li').on('click', function(){
+					var user_ID = $(this).data('user');
+					var title = $(this).data('stream-title');
+					streamInject($(this), user_ID, title);
+				});	
 			});
 		}
 
@@ -88,12 +93,13 @@ $(document).ready(function(){
 			// Embed the First User's Stream
 				first.addClass('selected').focus();
 				streamInject(first, user_first, title_first);
-			
-			streamerList.find('li').on('click', function(){
-				var user_ID = $(this).data('user');
-				var title = $(this).data('stream-title');
-				streamInject($(this), user_ID, title);
-			});	
+
+				$('#streamer-list li').on('click', function(){
+					console.log('clicked');
+					var user_ID = $(this).data('user');
+					var title = $(this).data('stream-title');
+					streamInject($(this), user_ID, title);
+				});	
 
 			// Defining Key Press Functions
 				var streamListUserReset = function() {
