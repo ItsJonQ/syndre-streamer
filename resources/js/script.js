@@ -21,9 +21,12 @@ $(document).ready(function(){
 		theSidebar = $('#sidebar');
 		streamWatching = $('#streamer-watching');
 
+		fsTrigger = $('.fullscreen-trigger');
+
 		iconMenu = $('.option.menu');
 		iconChat = $('.option.chat');
 		iconRefresh = $('.option.refresh');
+		iconFS = $('.option.fullscreen');
 
 	// Defining Global Functions
 		twitchHots = function() {
@@ -116,21 +119,38 @@ $(document).ready(function(){
 
 		var idleActionTime = 300;
 
-		userIdle = function() {
-			theHeader.animate({ height: '0px'}, idleActionTime);
+		fullscreenActivate  = function() {
+			theHeader.animate({ height: '0px'}, idleActionTime-100);
 			streamWrap.animate({ top: '0px'}, idleActionTime);
 			streamArea.animate({ bottom: '-30px'}, idleActionTime);
+			fsTrigger.animate({ bottom: '15px'}, idleActionTime);
 			if(streamerList.hasClass('active')) {
 				streamerList.animate({ left: -(streamerListW+1) }, idleActionTime);
 			}
 		}
 
-		userActive = function() {
-			theHeader.animate({ height: '35px'}, idleActionTime);
+		fullscreenDectivate = function() {
+			theHeader.animate({ height: '35px'}, idleActionTime-100);
 			streamWrap.animate({ top: '36px'}, idleActionTime);
 			streamArea.animate({ bottom: '0px'}, idleActionTime);
+			fsTrigger.animate({ bottom: '30px'}, idleActionTime);
 			if(streamerList.hasClass('active')) {
 				streamerList.animate({ left: 0 }, idleActionTime);
+			}
+		}
+
+		fullscreenTrigger = function() {
+			var t = fsTrigger;
+			if(!streamWrap.hasClass('fullscreen-mode')) {
+				t.addClass('activate');
+				streamWrap.addClass('fullscreen-mode');
+				fullscreenActivate();
+				console.log('Fullscreen mode activated.');
+			} else {
+				t.removeClass('activate');
+				streamWrap.removeClass('fullscreen-mode');
+				fullscreenDectivate();
+				console.log('Fullscreen mode dectivated.');
 			}
 		}
 
@@ -274,6 +294,11 @@ $(document).ready(function(){
 							}
 						}
 						
+					// "F" for Fullscreen Mode
+						if(e.keyCode == 70) {
+							fullscreenTrigger();
+						}
+
 						// console.log(e.keyCode);
 
 					// if (e.keyCode == 83) {
@@ -322,19 +347,23 @@ $(document).ready(function(){
 			theSidebar.toggleClass('hidden');
 		});
 
+		iconFS.on('click',function() {
+			fullscreenTrigger();
+		});
+
 		// exitPage();
 
 	// Idle Functions
 
 		$(document).bind("idle.idleTimer", function(){
-			userIdle();
+			// fullscreenActivate();
 			if(debugMode == true) {
 				console.log('User is now idle.');	
 			}
         });
 
         $(document).bind("active.idleTimer", function(){
-        	userActive();
+        	// fullscreenDeactive();
 			if(debugMode == true) {
 				console.log('User is now active.');	
 			}
