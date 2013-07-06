@@ -391,7 +391,7 @@
 		margin: -100px 0px 0px -200px;
 		display: none;
 		z-index: 99;
-	}
+	} */
 
 	#streamer-watching {
 		background: black;
@@ -417,7 +417,7 @@
 	#streamer-watching span.title {
 		color: #ddd;
 		font-size: 13px;
-	}*/
+	}
 
 /* The Media Queries */
 	@media all and (max-width : 680px) {

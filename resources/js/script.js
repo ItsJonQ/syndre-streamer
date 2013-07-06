@@ -87,11 +87,11 @@ $(document).ready(function(){
 			twitchEmbed(user);	
 			streamWrap.attr('data-twitch-user', user);
 			streamWrap.attr('data-twitch-title', title);
-			// streamWatching.html('You Are Now Watching <span>'+user+'</span> <span class="title">'+title+'</span>');
+			streamWatching.html('You Are Now Watching <span class="highlight-text">'+user+'</span>');
 			theHeader.find('.now-watching').html('Now Watching <span class="streamer highlight-text">'+user+'</span>: ');
 			theHeader.find('.stream-title').html(title)
 			setTimeout(function(){ twitchChat(); }, 50);
-			// streamWatching.fadeIn('fast').delay(2000).fadeOut('fast');
+			streamWatching.show().delay(3000).fadeOut('fast');
 		}
 
 		streamListRefresh = function() {
@@ -116,7 +116,7 @@ $(document).ready(function(){
 			});
 		}
 
-		var fsActionTime = 200;
+		var fsActionTime = 100;
 
 		chatTrigger = function() {
 			var sa = 'sidebar-active';
@@ -137,7 +137,7 @@ $(document).ready(function(){
 		fullscreenActivate = function() {
 			fsTrigger.addClass('activate');
 			streamWrap.addClass('fullscreen-mode');
-			theHeader.animate({ height: '0px'}, fsActionTime-100);
+			theHeader.animate({ height: '0px'}, fsActionTime-50);
 			streamWrap.animate({ top: '0px'}, fsActionTime);
 			streamArea.animate({ bottom: '-30px'}, fsActionTime);
 			fsTrigger.animate({ bottom: '15px'}, fsActionTime);
@@ -149,7 +149,7 @@ $(document).ready(function(){
 		fullscreenDectivate = function() {
 			fsTrigger.removeClass('activate');
 			streamWrap.removeClass('fullscreen-mode');
-			theHeader.animate({ height: '35px'}, fsActionTime-100);
+			theHeader.animate({ height: '35px'}, fsActionTime-50);
 			streamWrap.animate({ top: '36px'}, fsActionTime);
 			streamArea.animate({ bottom: '0px'}, fsActionTime);
 			fsTrigger.animate({ bottom: '30px'}, fsActionTime);
