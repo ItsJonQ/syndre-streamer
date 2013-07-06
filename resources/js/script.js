@@ -1,15 +1,28 @@
 $(document).ready(function(){
+
+	debugMode = false;
+	var initialLoadTime = new Date();
+
 	// Defining Global Variables
 		theHeader = $('#header');
 		streamWrap = $('#stream-wrapper');
 		streamerList = $('#streamer-list');
+		streamerLi = streamerList.find('li');
 		streamArea = $('#livestream');
 		theSidebar = $('#sidebar');
 		streamWatching = $('#streamer-watching');
-		headerOffset = $('#header').height();
+
+	// Debug Mode
+
+		debugMode = true; // Uncomment This to Activate Debug Mode
+		
+		debugEle = '<div class="debug db-message">Debug Mode is On</div>';
+		// Debug Mode Properties
+			if(debugMode == true ) { console.log('Debug Mode is On!'); }
 
 	// Defining Global Functions
 		twitchHots = function() {
+			var initialLoadTime = new Date();
 			var twitchHots_api = 'http://api.justin.tv/api/stream/list.json?meta_game=StarCraft%20II:%20Heart%20of%20the%20Swarm&limit=25&jsonp=?';
 			$.getJSON(twitchHots_api, function(data) {
 				$.each(data,function(i, data) {
@@ -24,11 +37,11 @@ $(document).ready(function(){
 				if(currentUser.length) {
 					streamerList.find('.'+currentUser).addClass('selected');
 				}
-				$('#streamer-list li').on('click', function(){
-					var user_ID = $(this).data('user');
-					var title = $(this).data('stream-title');
-					streamInject($(this), user_ID, title);
-				});	
+				streamUserClick();
+				if(debugMode == true) {
+					var loadTime = new Date();
+					console.log('Twitch API fetch was successful. ('+ (loadTime - initialLoadTime) + 'ms)');
+				}
 			});
 		}
 
@@ -37,18 +50,31 @@ $(document).ready(function(){
 			var width = '1920';
 			var height = '1080';
 			var twitch_stream = '<div class="livestream-embed"><object type="application/x-shockwave-flash" height="'+height+'" width="'+width+'" id="live_embed_player_flash" data="http://www.twitch.tv/widgets/live_embed_player.swf?channel=mlgsc2" bgcolor="#000000"><param name="allowFullScreen" value="true" /><param name="allowScriptAccess" value="always" /><param name="allowNetworking" value="all" /><param name="movie" value="http://www.twitch.tv/widgets/live_embed_player.swf" /><param name="flashvars" value="hostname=www.twitch.tv&channel='+username+start+'" /></object></div>';
-			streamArea.append(twitch_stream);	
+			
+			if(debugMode == false) {
+				streamArea.append(twitch_stream);
+			} else {
+				streamArea.html(debugEle);
+				console.log('Twitch stream embed for '+username+' was successful.');
+			}
 		}
 
 		twitchChat = function() {
 			var user = $('.watching').find('.streamer').text();
 			var chat_embed_code = '<iframe frameborder="0" scrolling="no" id="chat_embed" src="http://twitch.tv/chat/embed?channel='+user+'&amp;popout_chat=true" height="100%" width="300"></iframe></div></div>';
-			theSidebar.find('.twitch-chat .widget-header').html('<span class="highlight-text">'+user+'</span> Twitch Chat');
-			theSidebar.find('.twitch-chat .widget-body').html(chat_embed_code);
+			var tChat = theSidebar.find('.twitch-chat');
+			tChat.find('.widget-header').html('<span class="highlight-text">'+user+'</span> Twitch Chat');
+			if(debugMode == false) {
+				tChat.find('.widget-body').html(chat_embed_code);
+			} else {
+				tChat.find('.widget-body').html(debugEle);
+				console.log('Twitch chat for '+user+' embed was successful.');
+			}
+			
 		}
 
 		streamInject = function(ele, user, title) {
-			streamerList.find('li').removeClass('selected');
+			streamerLi.removeClass('selected');
 			ele.addClass('selected');
 			streamArea.html('');
 			twitchEmbed(user);	
@@ -69,7 +95,15 @@ $(document).ready(function(){
 				twitchHots();
 			}, 600);
 			
-			console.log('refreshed');
+			if(debugMode == true) { console.log('Twitch stream list refresh was successful.'); }
+		}
+
+		streamUserClick = function() {
+			streamerList.find('li').on('click', function(){
+				var user_ID = $(this).data('user');
+				var title = $(this).data('stream-title');
+				streamInject($(this), user_ID, title);
+			});
 		}
 
 		exitPage = function() {
@@ -85,6 +119,11 @@ $(document).ready(function(){
 		
 		$(window).load(function(){
 
+			if(debugMode == true) { 
+				var loadTime = new Date();
+				console.log('Window has loaded successfully. ('+ (loadTime - initialLoadTime) + 'ms)'); 
+			}
+
 			// Get The First User's Information
 				var first = streamerList.find('li').first();
 				var user_first = first.data('user');
@@ -93,13 +132,7 @@ $(document).ready(function(){
 			// Embed the First User's Stream
 				first.addClass('selected').focus();
 				streamInject(first, user_first, title_first);
-
-				$('#streamer-list li').on('click', function(){
-					console.log('clicked');
-					var user_ID = $(this).data('user');
-					var title = $(this).data('stream-title');
-					streamInject($(this), user_ID, title);
-				});	
+				streamUserClick();
 
 			// Defining Key Press Functions
 				var streamListUserReset = function() {
@@ -119,13 +152,16 @@ $(document).ready(function(){
 					if(direction == 'up') {
 						if( a.offset().top < 70 ) {
 							b.scrollTop(ps * h - h);
+							if(debugMode == true) { console.log('Scroll offset "Up" was successful.'); }
 						} else if (ps == 0) {
 							b.scrollTop(0);
+							if(debugMode == true) { console.log('Scroll offset "Up - Reset" was successful.'); }
 						}
 					} else if (direction == 'down') {
 						if( a.offset().top > b.height()) {
 							scrollCounter++;
 							b.scrollTop(h * scrollCounter);
+							if(debugMode == true) { console.log('Scroll offset "Down" was successful.'); }
 						}
 					} else {
 						return false;
@@ -201,12 +237,14 @@ $(document).ready(function(){
 						}
 
 					// "R" for Refresh List
-						if(e.keyCode == 82) {
-							if(streamerList.hasClass('active')) {
-								streamListRefresh();
+						if(debugMode == true) {
+							if(e.keyCode == 82) {
+								if(streamerList.hasClass('active')) {
+									streamListRefresh();
+								}
 							}
 						}
-
+						
 						// console.log(e.keyCode);
 
 					// if (e.keyCode == 83) {

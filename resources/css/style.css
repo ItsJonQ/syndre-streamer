@@ -272,6 +272,7 @@ body {
 
 #sidebar .widget-header {
 	background: black;
+	border-bottom: 1px solid #222;
 	color: #ddd;
 	font-size: 14px;
 	line-height: 1.2em;
@@ -285,7 +286,7 @@ body {
 	left: 0;
 	position: absolute;
 	right: 0;
-	top: 36px;
+	top: 37px;
 }
 
 #sidebar .twitch-chat iframe {
@@ -294,6 +295,20 @@ body {
 
 #stream-wrapper.sidebar-active #livestream {
 	right: 301px;
+}
+
+.debug.db-message {
+	background: #222;
+	color: white;
+	font-size: 15px;
+	left: 50%;
+	line-height: 1;
+	margin: -27px 0px 0px -75px;
+	padding: 20px;
+	position: absolute;
+	text-align: center;
+	text-transform: uppercase;
+	top: 50%;
 }
 
 @media all and (max-width : 680px) {
