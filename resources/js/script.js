@@ -118,6 +118,7 @@ $(document).ready(function(){
 		userIdle = function() {
 			theHeader.animate({ height: '0px'}, idleActionTime);
 			streamWrap.animate({ top: '0px'}, idleActionTime);
+			streamArea.animate({ bottom: '-30px'}, idleActionTime);
 			if(streamerList.hasClass('active')) {
 				streamerList.animate({ width: '0px'}, idleActionTime);
 			}
@@ -126,6 +127,7 @@ $(document).ready(function(){
 		userActive = function() {
 			theHeader.animate({ height: '35px'}, idleActionTime);
 			streamWrap.animate({ top: '36px'}, idleActionTime);
+			streamArea.animate({ bottom: '0px'}, idleActionTime);
 			if(streamerList.hasClass('active')) {
 				streamerList.animate({ width: '200px'}, idleActionTime);
 			}
