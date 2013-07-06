@@ -201,11 +201,11 @@ $(document).ready(function(){
 						}
 
 					// "R" for Refresh List
-						if(e.keyCode == 82) {
-							if(streamerList.hasClass('active')) {
-								streamListRefresh();
-							}
-						}
+						// if(e.keyCode == 82) {
+						// 	if(streamerList.hasClass('active')) {
+						// 		streamListRefresh();
+						// 	}
+						// }
 
 						// console.log(e.keyCode);
 
