@@ -207,7 +207,7 @@
 		position: fixed;
 		text-transform: uppercase;
 		top: 36px;
-		width: 210px;
+		width: 200px;
 		z-index: 9999;
 	}
 
@@ -257,7 +257,6 @@
 
 	#streamer-list.active ul {
 		min-width: 200px;
-		padding-right: 10px;
 	}
 
 	#streamer-list.active li.selected {
