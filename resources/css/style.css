@@ -1,318 +1,378 @@
-html,
-body {
-	background: black;
-	font-family: 'roboto condensed', 'HelveticaNeue-Condensed', 'Sans-Serif';
-	height: 100%;
-	margin: 0;
-	padding: 0;
-	position: relative;
-	width: 100%;
-}
+/* The Base */
+	html,
+	body {
+		background: black;
+		font-family: 'roboto condensed', 'HelveticaNeue-Condensed', 'Sans-Serif';
+		height: 100%;
+		margin: 0;
+		padding: 0;
+		position: relative;
+		width: 100%;
+	}
 
-body {
-	overflow: hidden;
-}
+	body {
+		overflow: hidden;
+	}
 
-.left {
-	float: left;
-}
+	.left {
+		float: left;
+	}
 
-.right {
-	float: right;
-}
+	.right {
+		float: right;
+	}
 
-.hidden {
-	display: none;
-}
-
-.highlight-text {
-	color: orangered;
-}
-
-.action {
-	cursor: pointer;
-}
-
-.header {
-	background: black;
-	border-bottom: 1px solid #333;
-	color: white;
-	font-size: 18px;
-	height: 35px;
-	left: 0;
-	overflow: hidden;
-	position: fixed;
-	text-transform: uppercase;
-	top: 0;
-	width: 100%;
-}
-
-.header-elements {
-	overflow: hidden;
-	padding: 5px 10px;
-}
-
-.the-menu,
-.the-logo,
-.watching {
-	float: left;
-}
-
-.the-menu {
-	padding: 2px 0px;
-	margin-right: 10px;
-}
-
-.the-logo {
-	margin-right: 10px;
-}
-
-.watching {
-	color: #777;
-	font-size: 11px;
-	height: 24px;
-	line-height: 25px;
-	padding: 0px 0px;
-	max-width: 520px;
-	overflow: hidden;
-}
-
-.watching .streamer {
-	margin-left: 3px;
-}
-
-.watching .title {
-	color: #ccc;
-	position: relative;
-}
-
-.header .icons-options .option {
-	color: #666;
-	font-size: 14px;
-	height: 16px;
-	line-height: 1em;
-	margin: 5px 0px 0px 5px;
-	width: 16px;
-}
-
-.header .icons-options .option.active-on {
-	color: #fff;
-}
-
-.noclick {
-	width: 100%;
-	height: 100%;
-	position: fixed;
-	z-index: 3;
-	bottom: 50px;
-	left: 0px;
-}
-
-#stream-wrapper {
-	bottom: 0;
-	left: 0;
-	position: absolute;
-	right: 0;
-	top: 36px;
-}
-
-#streamer-list  {
-	background: rgba(0,0,0,0.8);
-	border-right: 1px solid rgba(255,255,255,0.4);
-	color: white;
-	display: none;
-	font-size: 12px;
-	left: 0;
-	margin: 0;
-	padding: 0;
-	position: fixed;
-	text-transform: uppercase;
-	top: 36px;
-	bottom: 28px;
-	z-index: 9999;
-}
-
-#streamer-list .list-header {
-	border-bottom: 1px solid #222;
-	color: #777;
-	left: 0;
-	padding: 8px 10px;
-	position: absolute;
-	right: 0;
-	top: 0;
-	width: auto;
-}
-
-#streamer-list .list-header:hover {
-	color: white;
-}
-
-#streamer-list ul {
-	cursor: pointer;
-	list-style: none;
-	overflow: hidden;
-	overflow-y: auto;
-	margin: 0;
-	padding: 0;
-	position: absolute;
-	opacity: 0.5;
-	top: 33px;
-	bottom: 0px;
-}
-
-#streamer-list li {
-	line-height: 1;
-	padding: 10px 15px;
-}
-
-#streamer-list li .view-count {
-	display: none;
-}
-
-#streamer-list.active {
-	display: block;
-	width: 210px;
-}
-
-#streamer-list.active li {
-	display: block;
-}
-
-#streamer-list:hover ul,
-#streamer-list.active ul {
-	opacity: 1;
-}
-
-#streamer-list.active ul {
-	min-width: 200px;
-	padding-right: 10px;
-}
-
-#streamer-list.active li.selected {
-	color: orangered;
-}
-
-#streamer-list.active li:hover {
-	background: orangered;
-	color: white;
-}
-
-#streamer-list li.selected {
-	color: white;
-}
-
-#streamer-search {
-	background: rgba(0,0,0,0.8);
-	width: 400px;
-	height: 200px;
-	position: fixed;
-	top: 50%;
-	left: 50%;
-	margin: -100px 0px 0px -200px;
-	display: none;
-	z-index: 99;
-}
-
-#streamer-watching {
-	background: black;
-	color: white;
-	display: none;
-	font-size: 32px;
-	left: 50%;
-	margin: -110px 0px 0px -250px;
-	position: fixed;
-	top: 50%;
-	width: 400px;
-	z-index: 99;
-	padding: 50px;
-	text-align: center;
-	text-transform: uppercase;
-}
-
-#streamer-watching span {
-	display: block;
-	line-height: 38px;
-}
-
-#streamer-watching span.title {
-	color: #ddd;
-	font-size: 13px;
-}
-
-#livestream {
-	bottom: 0;
-	left: 0;
-	margin: 0 auto;
-	position: absolute;
-	right: 0;
-	top: 0px;
-}
-
-#livestream object {
-	width: 100%;
-	height: 100%;
-}
-
-#sidebar {
-	border-left: 1px solid #222;
-	bottom: 0;
-	position: absolute;
-	right: 0;
-	top: 0px;
-	width: 300px;
-}
-
-#sidebar .side-widget {
-	bottom: 0;
-	left: 0;
-	position: absolute;
-	right: 0;
-	top: 0;
-}
-
-#sidebar .widget-header {
-	background: black;
-	border-bottom: 1px solid #222;
-	color: #ddd;
-	font-size: 14px;
-	line-height: 1.2em;
-	overflow: hidden;
-	padding: 10px;
-	text-transform: uppercase;
-}
-
-#sidebar .widget-body {
-	bottom: 0;
-	left: 0;
-	position: absolute;
-	right: 0;
-	top: 37px;
-}
-
-#sidebar .twitch-chat iframe {
-	height: 100% !important;
-}
-
-#stream-wrapper.sidebar-active #livestream {
-	right: 301px;
-}
-
-.debug.db-message {
-	background: #222;
-	color: white;
-	font-size: 15px;
-	left: 50%;
-	line-height: 1;
-	margin: -27px 0px 0px -75px;
-	padding: 20px;
-	position: absolute;
-	text-align: center;
-	text-transform: uppercase;
-	top: 50%;
-}
-
-@media all and (max-width : 680px) {
-	.watching .title {
+	.hidden {
 		display: none;
 	}
-}
+
+	.highlight-text {
+		color: orangered;
+	}
+
+	.action {
+		cursor: pointer;
+	}
+
+	.pos-abso {
+		bottom: 0;
+		left: 0;
+		position: absolute;
+		right: 0;
+		top: 0;
+	}
+
+	.noclick {
+		width: 100%;
+		height: 100%;
+		position: fixed;
+		z-index: 3;
+		bottom: 50px;
+		left: 0px;
+	}
+
+/* The Wrapper */
+
+	#stream-wrapper {
+		top: 36px;
+	}
+
+	#stream-wrapper.sidebar-active #livestream {
+		right: 301px;
+	}
+
+/*The Header*/
+
+	.header {
+		background: black;
+		border-bottom: 1px solid #333;
+		color: white;
+		font-size: 18px;
+		height: 35px;
+		left: 0;
+		overflow: hidden;
+		position: fixed;
+		text-transform: uppercase;
+		top: 0;
+		width: 100%;
+	}
+
+	/* The Header: Elements */
+
+		.header-elements {
+			overflow: hidden;
+			padding: 0px;
+		}
+
+		.header-ele {
+			float: left;
+			padding: 5px 0px;
+			margin-left: 0px;
+			margin-right: 10px;
+		}
+
+		.header-ele.right {
+			float: right;
+			margin-left: 10px;
+			margin-right: 0px;
+		}
+
+		.header-ele.left.sep {
+			border-right: 1px solid #222;
+		}
+
+		.header-ele.right.sep {
+			border-left: 1px solid #222;
+		}
+
+		.header-ele.icons-options {
+			padding: 0;
+		}
+
+	/* The Header: Menu & Logo */
+
+		.the-logo {
+			color: #ddd;
+			display: inline;
+			padding-right: 10px;
+		}
+
+		.the-logo h1 {
+			display: inline;
+			font-size: 18px;
+			font-weight: normal;
+			margin: 0;
+			padding: 0;
+		}
+
+	/* The Header: Stream Info */
+
+		.watching {
+			color: #777;
+			font-size: 11px;
+			height: 24px;
+			line-height: 25px;
+			overflow: hidden;
+		}
+
+		.watching .now-watching {
+			float: left;
+			margin-right: 3px;
+		}
+
+		.watching .streamer {
+			margin-left: 3px;
+		}
+
+		.watching .stream-title {
+			color: #ccc;
+			display: inline-block;
+			width: 400px;
+			overflow: hidden;
+			position: relative;
+			white-space: nowrap;
+		}
+
+		.watching .stream-title:after {
+			background: -moz-linear-gradient(left, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 100%); /* FF3.6+ */
+			background: -webkit-gradient(linear, left top, right top, color-stop(0%,rgba(0,0,0,0)), color-stop(100%,rgba(0,0,0,1))); /* Chrome,Safari4+ */
+			background: -webkit-linear-gradient(left, rgba(0,0,0,0) 0%,rgba(0,0,0,1) 100%); /* Chrome10+,Safari5.1+ */
+			background: -o-linear-gradient(left, rgba(0,0,0,0) 0%,rgba(0,0,0,1) 100%); /* Opera 11.10+ */
+			background: -ms-linear-gradient(left, rgba(0,0,0,0) 0%,rgba(0,0,0,1) 100%); /* IE10+ */
+			background: linear-gradient(to right, rgba(0,0,0,0) 0%,rgba(0,0,0,1) 100%); /* W3C */
+			filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#000000',GradientType=1 ); /* IE6-9 */
+			content:'';
+			position: absolute;
+			right: 0;
+			top: 0;
+			bottom: 0;
+			padding: 8px;
+			width: 40px;
+		}
+
+/*The Stream List */
+
+	#streamer-list  {
+		background: rgba(0,0,0,0.8);
+		border-right: 1px solid rgba(255,255,255,0.4);
+		bottom: 28px;
+		color: white;
+		display: none;
+		font-size: 12px;
+		left: 0;
+		margin: 0;
+		padding: 0;
+		position: fixed;
+		text-transform: uppercase;
+		top: 36px;
+		width: 210px;
+		z-index: 9999;
+	}
+
+	#streamer-list .list-header {
+		border-bottom: 1px solid #222;
+		color: #777;
+		left: 0;
+		padding: 2px;
+		position: absolute;
+		right: 0;
+		top: 0;
+		width: auto;
+	}
+
+	#streamer-list .list-header:hover {
+		color: white;
+	}
+
+	#streamer-list ul {
+		cursor: pointer;
+		list-style: none;
+		overflow: hidden;
+		overflow-y: auto;
+		margin: 0;
+		padding: 0;
+		position: absolute;
+		top: 33px;
+		bottom: 0px;
+	}
+
+	#streamer-list li {
+		line-height: 1;
+		padding: 10px 15px;
+	}
+
+	#streamer-list li .view-count {
+		display: none;
+	}
+
+	#streamer-list.active {
+		display: block;
+	}
+
+	#streamer-list.active li {
+		display: block;
+	}
+
+	#streamer-list.active ul {
+		min-width: 200px;
+		padding-right: 10px;
+	}
+
+	#streamer-list.active li.selected {
+		color: orangered;
+	}
+
+	#streamer-list.active li:hover {
+		background: orangered;
+		color: white;
+	}
+
+	#streamer-list li.selected {
+		color: white;
+	}
+
+/* The Livestream */
+
+	#livestream {
+		margin: 0 auto;
+	}
+
+	#livestream object {
+		width: 100%;
+		height: 100%;
+	}
+
+/* The Sidebar */
+
+	#sidebar {
+		border-left: 1px solid #222;
+		bottom: 0;
+		position: absolute;
+		right: 0;
+		top: 0px;
+		width: 300px;
+	}
+
+	#sidebar .widget-header {
+		background: black;
+		border-bottom: 1px solid #222;
+		color: #ddd;
+		font-size: 14px;
+		line-height: 1.2em;
+		overflow: hidden;
+		padding: 10px;
+		text-transform: uppercase;
+	}
+
+	#sidebar .widget-body {
+		position: absolute;
+		top: 37px;
+	}
+
+	#sidebar .twitch-chat iframe {
+		height: 100% !important;
+	}
+
+
+/* The Icons */
+
+	.icons-options i {
+		color: #666;
+		display: inline-block;
+		font-size: 14px;
+		height: 16px;
+		line-height: 1em;
+		margin: 0px;
+		padding: 10px;
+		width: 16px;
+	}
+
+	.icons-options i:hover,
+	.icons-options .option.active-on i {
+		color: #fff;
+	}
+
+	.icons-options.tiny-icons i {
+		padding: 6px;
+	}
+
+	.debug.db-message {
+		background: #222;
+		color: white;
+		font-size: 15px;
+		left: 50%;
+		line-height: 1;
+		margin: -27px 0px 0px -75px;
+		padding: 20px;
+		position: absolute;
+		text-align: center;
+		text-transform: uppercase;
+		top: 50%;
+	}
+
+/* Upcoming Features */
+
+/*	#streamer-search {
+		background: rgba(0,0,0,0.8);
+		width: 400px;
+		height: 200px;
+		position: fixed;
+		top: 50%;
+		left: 50%;
+		margin: -100px 0px 0px -200px;
+		display: none;
+		z-index: 99;
+	}
+
+	#streamer-watching {
+		background: black;
+		color: white;
+		display: none;
+		font-size: 32px;
+		left: 50%;
+		margin: -110px 0px 0px -250px;
+		position: fixed;
+		top: 50%;
+		width: 400px;
+		z-index: 99;
+		padding: 50px;
+		text-align: center;
+		text-transform: uppercase;
+	}
+
+	#streamer-watching span {
+		display: block;
+		line-height: 38px;
+	}
+
+	#streamer-watching span.title {
+		color: #ddd;
+		font-size: 13px;
+	}*/
+
+/* The Media Queries */
+	@media all and (max-width : 680px) {
+		.watching .stream-title {
+			display: none;
+		}
+	}

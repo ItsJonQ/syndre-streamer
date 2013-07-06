@@ -3,6 +3,13 @@ $(document).ready(function(){
 	debugMode = false;
 	var initialLoadTime = new Date();
 
+	// Debug Mode
+		// debugMode = true; // Uncomment This to Activate Debug Mode
+
+		debugEle = '<div class="debug db-message">Debug Mode is On</div>';
+		// Debug Mode Properties
+			if(debugMode == true ) { console.log('Debug Mode is On!'); }
+		
 	// Defining Global Variables
 		theHeader = $('#header');
 		streamWrap = $('#stream-wrapper');
@@ -12,13 +19,9 @@ $(document).ready(function(){
 		theSidebar = $('#sidebar');
 		streamWatching = $('#streamer-watching');
 
-	// Debug Mode
-
-		debugMode = true; // Uncomment This to Activate Debug Mode
-		
-		debugEle = '<div class="debug db-message">Debug Mode is On</div>';
-		// Debug Mode Properties
-			if(debugMode == true ) { console.log('Debug Mode is On!'); }
+		iconMenu = $('.option.menu');
+		iconChat = $('.option.chat');
+		iconRefresh = $('.option.refresh');
 
 	// Defining Global Functions
 		twitchHots = function() {
@@ -81,7 +84,8 @@ $(document).ready(function(){
 			streamWrap.attr('data-twitch-user', user);
 			streamWrap.attr('data-twitch-title', title);
 			// streamWatching.html('You Are Now Watching <span>'+user+'</span> <span class="title">'+title+'</span>');
-			theHeader.find('.watching').html('Now Watching <span class="streamer highlight-text">'+user+'</span>: <span class="title">'+title+'</span>');
+			theHeader.find('.now-watching').html('Now Watching <span class="streamer highlight-text">'+user+'</span>: ');
+			theHeader.find('.stream-title').html(title)
 			setTimeout(function(){ twitchChat(); }, 50);
 			// streamWatching.fadeIn('fast').delay(2000).fadeOut('fast');
 		}
@@ -177,9 +181,9 @@ $(document).ready(function(){
 							var userID = prevUser.data('user');
 							var title = prevUser.data('stream-title');
 							if(!streamerList.find('li.selected').is(':first-child')) {
+								streamerList.find('li.selected').removeClass('selected');
+								prevUser.addClass('selected');
 								if(streamerList.hasClass('active')) {
-									streamerList.find('li.selected').removeClass('selected');
-									prevUser.addClass('selected');
 									scrollOffset('up');
 								} else {
 									streamInject(prevUser, userID, title);
@@ -193,27 +197,26 @@ $(document).ready(function(){
 							var nextUser = streamerList.find('li.selected').next();
 							var userID = nextUser.data('user');
 							var title = nextUser.data('stream-title');
-
 							if(!streamerList.find('li.selected').is(':last-child')) {
+								streamerList.find('li.selected').removeClass('selected');
+								nextUser.addClass('selected');
 								if(streamerList.hasClass('active')) {
-									streamerList.find('li.selected').removeClass('selected');
-									nextUser.addClass('selected');
 									scrollOffset('down');
 								} else {
-									streamInject(nextUser, userID, title);
+									streamInject(nextUser, userID, title);d
 								}
 							}
 						}
 
 					// "Right" / "D" to Show Stream Menu
 						if(e.keyCode == 39 || e.keyCode == 68) {
-							// streamListUserReset();
+							iconMenu.toggleClass('active-on');
 							streamerList.addClass('active');
 						}
 
 					// "Left" / "A" to Hide Stream Menu
 						if(e.keyCode == 37 || e.keyCode == 65) {
-							// streamListUserReset();
+							iconMenu.toggleClass('active-on');
 							streamerList.removeClass('active scroll');
 						}
 
@@ -231,7 +234,7 @@ $(document).ready(function(){
 						if(e.keyCode == 67) {
 							var sa = 'sidebar-active';
 							var tc = $('.twitch-chat');
-							$('.option.chat').toggleClass('active-on');
+							iconChat.toggleClass('active-on');
 							streamWrap.toggleClass('sidebar-active');
 							theSidebar.toggleClass('hidden');						
 						}
@@ -259,29 +262,35 @@ $(document).ready(function(){
 
 	// Defining Mouse Action Functions
 
-		streamArea.on('mouseenter',function(){
-			streamerList.removeClass('active');
-		});
-
 		streamerList.on('mouseenter',function(){
 			$(this).addClass('active');
+			iconMenu.addClass('active-on');
 		});
 
-		streamerList.on('mouseleave',function(){
-			$(this).removeClass('active');
-		});
+		if(debugMode == false) {
+			streamArea.on('mouseenter',function(){
+				streamerList.removeClass('active');
+			});
 
-		$('.header-elements').find('.the-menu').on('click',function(){
+			streamerList.on('mouseleave',function(){
+				$(this).removeClass('active');
+				iconMenu.removeClass('active-on');
+			});
+		}		
+
+		iconMenu.on('click',function(){
+			$(this).toggleClass('active-on');
 			streamerList.toggleClass('active');
+			
 		});
 
-		$('.option.refresh').on('click', function(){
+		iconRefersh.on('click', function(){
 			if(streamerList.hasClass('active')) {
 				streamListRefresh();
 			}
 		});
 
-		$('.option.chat').on('click',function(){
+		iconChat.on('click',function(){
 			$(this).toggleClass('active-on');
 			streamWrap.toggleClass('sidebar-active');
 			theSidebar.toggleClass('hidden');

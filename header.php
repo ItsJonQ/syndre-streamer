@@ -1,12 +1,13 @@
-<html>
-<head>
-	<title>Syndre - Starcraft II HOTS Twitch Streamer</title>
-	<link rel="canonical" href="http://www.syndre.net/">
-	<meta name="description" content="A Twitch based web-app where you can seamlessly browse and watch the top Starcraft II HOTS streams."/>
-	<script type="text/javascript" src="resources/js/jquery.js"></script>
-	<script type="text/javascript" src="resources/js/script.js"></script>
-	<link rel="stylesheet" type="text/css" href="resources/css/web-font.css">
-	<link rel="stylesheet" type="text/css" href="resources/css/style.css">
-	<link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:400,700' rel='stylesheet' type='text/css'>
-</head>
-<body>
+<?php require('templates/header.php'); ?>
+
+<header id="header" class="logo header">
+	<div class="header-elements">
+		<div class="header-ele icons-options action left sep"><div class="option menu"><i class="icon-menu-2"></i></div></div>
+		<div class="header-ele the-logo left sep"><h1><span class="highlight-text">Syndre</span></h1> Beta</div>
+		<div class="header-ele watching"><div class="now-watching"></div><div class="stream-title"></div></div>
+		<div class="header-ele cutoff"></div>
+		<div class="header-ele icons-options right sep">
+			<div class="option chat action"><i class="icon-bubble"></i></div>
+		</div>	
+	</div>
+</header>
