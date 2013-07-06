@@ -161,10 +161,10 @@ $(document).ready(function(){
 		fullscreenTrigger = function() {
 			if(!streamWrap.hasClass('fullscreen-mode')) {
 				fullscreenActivate();
-				console.log('Fullscreen mode activated.');
+				if(debugMode == true) { console.log('Fullscreen mode activated.'); }
 			} else {			
 				fullscreenDectivate();
-				console.log('Fullscreen mode dectivated.');
+				if(debugMode == true) { console.log('Fullscreen mode dectivated.'); }
 			}
 		}
 
