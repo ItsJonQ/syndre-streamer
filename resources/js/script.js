@@ -2,6 +2,7 @@ $(document).ready(function(){
 
 	debugMode = false;
 	var initialLoadTime = new Date();
+	var idleTimeout = 3000;
 
 	// Debug Mode
 		// debugMode = true; // Uncomment This to Activate Debug Mode
@@ -110,6 +111,18 @@ $(document).ready(function(){
 				streamerList.find('.'+user_ID).addClass('selected');
 				streamInject($(this), user_ID, title);
 			});
+		}
+
+		var idleActionTime = 300;
+
+		userIdle = function() {
+			theHeader.animate({ height: '0px'}, idleActionTime);
+			streamWrap.animate({ top: '0px'}, idleActionTime);
+		}
+
+		userActive = function() {
+			theHeader.animate({ height: '35px'}, idleActionTime);
+			streamWrap.animate({ top: '36px'}, idleActionTime);
 		}
 
 		exitPage = function() {
@@ -301,5 +314,23 @@ $(document).ready(function(){
 		});
 
 		// exitPage();
+
+	// Idle Functions
+
+		$(document).bind("idle.idleTimer", function(){
+			userIdle();
+			if(debugMode == true) {
+				console.log('User is now idle.');	
+			}
+        });
+
+        $(document).bind("active.idleTimer", function(){
+        	userActive();
+			if(debugMode == true) {
+				console.log('User is now active.');	
+			}
+        });
+        
+        $.idleTimer(idleTimeout);
 
 });
