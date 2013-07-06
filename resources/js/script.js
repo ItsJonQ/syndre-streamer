@@ -106,6 +106,8 @@ $(document).ready(function(){
 			streamerList.find('li').on('click', function(){
 				var user_ID = $(this).data('user');
 				var title = $(this).data('stream-title');
+				streamerList.find('li').removeClass('selected');
+				streamerList.find('.'+user_ID).addClass('selected');
 				streamInject($(this), user_ID, title);
 			});
 		}
@@ -134,7 +136,7 @@ $(document).ready(function(){
 				var title_first = first.data('stream-title');
 
 			// Embed the First User's Stream
-				first.addClass('selected').focus();
+				first.addClass('selected');
 				streamInject(first, user_first, title_first);
 				streamUserClick();
 
@@ -182,7 +184,7 @@ $(document).ready(function(){
 							var title = prevUser.data('stream-title');
 							if(!streamerList.find('li.selected').is(':first-child')) {
 								streamerList.find('li.selected').removeClass('selected');
-								prevUser.addClass('selected');
+								prevUser.addClass('selected').focus();
 								if(streamerList.hasClass('active')) {
 									scrollOffset('up');
 								} else {
@@ -199,7 +201,7 @@ $(document).ready(function(){
 							var title = nextUser.data('stream-title');
 							if(!streamerList.find('li.selected').is(':last-child')) {
 								streamerList.find('li.selected').removeClass('selected');
-								nextUser.addClass('selected');
+								nextUser.addClass('selected').focus();
 								if(streamerList.hasClass('active')) {
 									scrollOffset('down');
 								} else {
@@ -210,12 +212,14 @@ $(document).ready(function(){
 
 					// "Right" / "D" to Show Stream Menu
 						if(e.keyCode == 39 || e.keyCode == 68) {
+							// streamListUserReset();
 							iconMenu.toggleClass('active-on');
 							streamerList.addClass('active');
 						}
 
 					// "Left" / "A" to Hide Stream Menu
 						if(e.keyCode == 37 || e.keyCode == 65) {
+							// streamListUserReset();
 							iconMenu.toggleClass('active-on');
 							streamerList.removeClass('active scroll');
 						}
@@ -284,7 +288,7 @@ $(document).ready(function(){
 			
 		});
 
-		iconRefersh.on('click', function(){
+		iconRefresh.on('click', function(){
 			if(streamerList.hasClass('active')) {
 				streamListRefresh();
 			}
