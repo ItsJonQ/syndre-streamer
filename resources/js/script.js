@@ -16,8 +16,14 @@ $(document).ready(function(){
 					var user = data.channel.login;
 					var twitch_live_view_count = data.channel_count;
 					var stream_title = data.title;
-					streamerList.find('ul').append('<li id="'+twitch_live_view_count+'" data-user="'+user+'" data-stream-title="'+stream_title+'">'+user+'<span class="view-count">'+twitch_live_view_count+'</span></li>');
+					streamerList.find('ul').append('<li id="'+twitch_live_view_count+'" data-user="'+user+'" data-stream-title="'+stream_title+'" class="'+user+'">'+user+'<span class="view-count">'+twitch_live_view_count+'</span></li>');
 				});
+			})
+			.done(function(){
+				var currentUser = $('.watching').find('.streamer').text();
+				if(currentUser.length) {
+					streamerList.find('.'+currentUser).addClass('selected');
+				}
 			});
 		}
 
@@ -49,6 +55,25 @@ $(document).ready(function(){
 			// streamWatching.fadeIn('fast').delay(2000).fadeOut('fast');
 		}
 
+		streamListRefresh = function() {
+			streamerList.find('li').fadeOut(400);
+			setTimeout(function(){
+				streamerList.find('li').remove();
+			}, 500)
+			setTimeout(function(){
+				twitchHots();
+			}, 600);
+			
+			console.log('refreshed');
+		}
+
+		exitPage = function() {
+			$(window).bind('beforeunload', function(){
+				return "This message popped up to counter potential accidental clickage.";
+			});
+
+		}
+
 	// Execute Initial Functions on Page Load
 
 		twitchHots();
@@ -71,36 +96,93 @@ $(document).ready(function(){
 			});	
 
 			// Defining Key Press Functions
+				var streamListUserReset = function() {
+					var currentUser = $('.watching').find('.streamer').text();
+					streamerList.find('li').removeClass('selected');
+					streamerList.find('.'+currentUser).addClass('selected');
+				}
+
+				var scrollCounter = 0;
+
+				var scrollOffset = function(direction){
+					var a = streamerList.find('li.selected');
+					var b = streamerList.find('ul');
+					var p = a.prevAll();
+					var ps = p.size();
+					var h = 32;
+					if(direction == 'up') {
+						if( a.offset().top < 70 ) {
+							b.scrollTop(ps * h - h);
+						} else if (ps == 0) {
+							b.scrollTop(0);
+						}
+					} else if (direction == 'down') {
+						if( a.offset().top > b.height()) {
+							scrollCounter++;
+							b.scrollTop(h * scrollCounter);
+						}
+					} else {
+						return false;
+					}
+					
+				}
 
 				$(document).on('keydown', function(e) {
+
 					// "Up" / "W" for Previous
 						if(e.keyCode == 38 || e.keyCode == 87) {
 							var prevUser = streamerList.find('li.selected').prev()
 							var userID = prevUser.data('user');
 							var title = prevUser.data('stream-title');
 							if(!streamerList.find('li.selected').is(':first-child')) {
-								streamInject(prevUser, userID, title);
+								if(streamerList.hasClass('active')) {
+									streamerList.find('li.selected').removeClass('selected');
+									prevUser.addClass('selected');
+									scrollOffset('up');
+								} else {
+									streamInject(prevUser, userID, title);
+								}	
 							}
 						}
+						
 
 					// "Down" / "S" for Next
 						if(e.keyCode == 40 || e.keyCode == 83) {
 							var nextUser = streamerList.find('li.selected').next();
 							var userID = nextUser.data('user');
 							var title = nextUser.data('stream-title');
+
 							if(!streamerList.find('li.selected').is(':last-child')) {
-								streamInject(nextUser, userID, title);
+								if(streamerList.hasClass('active')) {
+									streamerList.find('li.selected').removeClass('selected');
+									nextUser.addClass('selected');
+									scrollOffset('down');
+								} else {
+									streamInject(nextUser, userID, title);
+								}
 							}
 						}
 
 					// "Right" / "D" to Show Stream Menu
 						if(e.keyCode == 39 || e.keyCode == 68) {
+							// streamListUserReset();
 							streamerList.addClass('active');
 						}
 
 					// "Left" / "A" to Hide Stream Menu
 						if(e.keyCode == 37 || e.keyCode == 65) {
+							// streamListUserReset();
 							streamerList.removeClass('active scroll');
+						}
+
+					// "Enter" / "E" to Activate Selected User's Stream
+						if(e.keyCode == 13 || e.keyCode == 69) {
+							if(streamerList.hasClass('active')) {
+								var user = streamerList.find('li.selected');
+								var userID = user.data('user');
+								var title = user.data('stream-title');
+								streamInject(user, userID, title);
+							}
 						}
 
 					// "C" for Chat
@@ -111,6 +193,15 @@ $(document).ready(function(){
 							streamWrap.toggleClass('sidebar-active');
 							theSidebar.toggleClass('hidden');						
 						}
+
+					// "R" for Refresh List
+						if(e.keyCode == 82) {
+							if(streamerList.hasClass('active')) {
+								streamListRefresh();
+							}
+						}
+
+						// console.log(e.keyCode);
 
 					// if (e.keyCode == 83) {
 					// 	if(!$('#streamer-search').hasClass('show')) {
@@ -136,8 +227,14 @@ $(document).ready(function(){
 			$(this).removeClass('active');
 		});
 
-		$('.header-elements').find('.the-menu').on('mouseenter',function(){
-			streamerList.addClass('active');
+		$('.header-elements').find('.the-menu').on('click',function(){
+			streamerList.toggleClass('active');
+		});
+
+		$('.option.refresh').on('click', function(){
+			if(streamerList.hasClass('active')) {
+				streamListRefresh();
+			}
 		});
 
 		$('.option.chat').on('click',function(){
@@ -146,8 +243,6 @@ $(document).ready(function(){
 			theSidebar.toggleClass('hidden');
 		});
 
-		$(window).bind('beforeunload', function(){
-	  		return "This message popped up to counter potential accidental clickage.";
-		});
+		// exitPage();
 
 });
