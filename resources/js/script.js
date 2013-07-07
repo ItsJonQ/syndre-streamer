@@ -206,10 +206,10 @@ $(document).ready(function(){
 				var terran = '.avilo, .demuslim, .dragon, .liquidtaeja, .painuser, .selectkr, .sterlingkolde';
 
 			// Protoss Players
-				var protoss = '.axeltoss, .incontroltv, .liquidhero, .kuroa1, .puckk, .weedamins';
+				var protoss = '.axeltoss, .incontroltv, .liquidhero, .kuroa1, .puckk, .wayne379, .weedamins';
 
 			// Zerg Players
-				var zerg = '.armzi, .idrajit, .mannansc, .protech';
+				var zerg = '.armzi, .idrajit, .kawaiirice, .massansc, .protech, .tilea';
 
 			streamerList.find('li').each(function(){
 				if($(this).is(terran)) {
