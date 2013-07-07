@@ -209,13 +209,13 @@ $(document).ready(function(){
 		playerRace = function() {
 
 			// Terran Players
-				var terran = '.avilo, .brentstarcraft, .demuslim, .dragon, .gamegene, .liquidtaeja, .painuser, .selectkr, .squishy88, .sterlingkolde';
+				var terran = '.avilo, .brentstarcraft, .colthestc, .demuslim, .dragon, .gamegene, .liquidtaeja, .painuser, .selectkr, .squishy88, .sterlingkolde';
 
 			// Protoss Players
-				var protoss = '.axeltoss, .dreadnoughtt, .finalmastery, .incontroltv, .naniwasc2, .liquidhero, .kuroa1, .puckk, .wayne379, .weedamins';
+				var protoss = '.axeltoss, .crimson_sc2, .dreadnoughtt, .finalmastery, .followgrubby, .incontroltv, .naniwasc2, .liquidhero, .kuroa1, .puckk, .tarrantius, .wayne379, .weedamins';
 
 			// Zerg Players
-				var zerg = '.armzi, .idrajit, .kawaiirice, .massansc, .protech, .tilea, .wiredguitars';
+				var zerg = '.armzi, .bexysc, .dimaga, .empiretvpeptar, .empiretvzerg, .idrajit, .kawaiirice, .massansc, .protech, .tilea, .wiredguitars';
 
 			streamerList.find('li').each(function(){
 				if($(this).is(terran)) {
