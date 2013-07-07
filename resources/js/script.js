@@ -190,13 +190,13 @@ $(document).ready(function(){
 		playerRace = function() {
 
 			// Terran Players
-				var terran = '.avilo, .demuslim, .painuser, .selectkr';
+				var terran = '.avilo, .demuslim, .dragon, .painuser, .selectkr, .sterlingkolde';
 
 			// Protoss Players
-				var protoss = '.axeltoss, .incontroltv, .liquidhero, .puckk';
+				var protoss = '.axeltoss, .incontroltv, .liquidhero, .puckk, .weedamins';
 
 			// Zerg Players
-				var zerg = '.idrait';
+				var zerg = '.armzi, .idrajit, .protech';
 
 			streamerList.find('li').each(function(){
 				if($(this).is(terran)) {
