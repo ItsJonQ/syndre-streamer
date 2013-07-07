@@ -361,7 +361,7 @@ $(document).ready(function(){
 						}
 						// streamListUserReset();
 						streamerLi.blur();
-						iconMenu.toggleClass('active-on');
+						iconMenu.add('active-on');
 						streamerList.addClass('active');
 					}
 
@@ -378,7 +378,7 @@ $(document).ready(function(){
 						}
 						// streamListUserReset();
 						streamerLi.blur();
-						iconMenu.toggleClass('active-on');
+						iconMenu.removeClass('active-on');
 						streamerList.removeClass('active scroll').css('left', 0);
 					}
 
