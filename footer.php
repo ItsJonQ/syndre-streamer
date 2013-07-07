@@ -3,6 +3,7 @@
 			<div class="option fullscreen action icon-bg"><i class="icon-contract" title="Dectivate Fullscreen Mode"></i><i class="icon-expand" title="Activate Fullscreen Mode"></i></div>
 		</div>	
 	</div>
+	<div class="modal-shader pos-abso"></div>
 	<script>
 		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),

@@ -10,7 +10,7 @@ $(document).ready(function(){
 
 		debugEle = '<div class="debug db-message">Debug Mode is On</div>';
 		// Debug Mode Properties
-			if(superDebugMode == true ) { console.log('SUPER Debug Mode is On!'); }
+			// if(superDebugMode == true ) { console.log('SUPER Debug Mode is On!'); }
 			if(debugMode == true ) { console.log('Debug Mode is On!'); }
 		
 	// Defining Global Variables
@@ -23,6 +23,8 @@ $(document).ready(function(){
 		streamArea = $('#livestream');
 		theSidebar = $('#sidebar');
 		streamWatching = $('#streamer-watching');
+		theModal = $('.modal');
+		theShade = $('.modal-shader');
 
 		fsTrigger = $('.fullscreen-trigger');
 
@@ -30,6 +32,9 @@ $(document).ready(function(){
 		iconChat = $('.option.chat');
 		iconRefresh = $('.option.refresh');
 		iconFS = $('.option.fullscreen');
+		iconHK = $('.option.hotkeys');
+
+		modalWindowHotkey = $('.window-help');
 
 
 	// Reserving Functions and Features for Desktop Only
@@ -179,6 +184,16 @@ $(document).ready(function(){
 			}
 		}
 
+		modalHotkey = function() {
+			if(!modalWindowHotkey.hasClass('active')) {
+				modalWindowHotkey.addClass('active');
+				theShade.addClass('active');
+			} else {
+				modalWindowHotkey.removeClass('active');
+				theShade.removeClass('active');
+			}
+		}
+
 		exitPage = function() {
 			$(window).bind('beforeunload', function(){
 				return "This message popped up to counter potential accidental clickage.";
@@ -277,6 +292,15 @@ $(document).ready(function(){
 
 					// "Up" / "W" for Previous
 						if(e.keyCode == 38 || e.keyCode == 87) {
+							if(modalWindowHotkey.hasClass('active')) {
+								if(e.keyCode == 38) {
+									$('#key-up').addClass('triggered');
+								}
+
+								if(e.keyCode == 87) {
+									$('#key-w').addClass('triggered');
+								}							
+							}
 							var prevUser = streamerList.find('li.selected').prev()
 							var userID = prevUser.data('user');
 							var title = prevUser.data('stream-title');
@@ -294,6 +318,15 @@ $(document).ready(function(){
 
 					// "Down" / "S" for Next
 						if(e.keyCode == 40 || e.keyCode == 83) {
+							if(modalWindowHotkey.hasClass('active')) {
+								if(e.keyCode == 40) {
+									$('#key-down').addClass('triggered');
+								}
+
+								if(e.keyCode == 83) {
+									$('#key-s').addClass('triggered');
+								}							
+							}
 							var nextUser = streamerList.find('li.selected').next();
 							var userID = nextUser.data('user');
 							var title = nextUser.data('stream-title');
@@ -310,6 +343,15 @@ $(document).ready(function(){
 
 					// "Right" / "D" to Show Stream Menu
 						if(e.keyCode == 39 || e.keyCode == 68) {
+							if(modalWindowHotkey.hasClass('active')) {
+								if(e.keyCode == 39) {
+									$('#key-right').addClass('triggered');
+								}
+
+								if(e.keyCode == 68) {
+									$('#key-d').addClass('triggered');
+								}
+							}
 							// streamListUserReset();
 							iconMenu.toggleClass('active-on');
 							streamerList.addClass('active');
@@ -317,6 +359,15 @@ $(document).ready(function(){
 
 					// "Left" / "A" to Hide Stream Menu
 						if(e.keyCode == 37 || e.keyCode == 65) {
+							if(modalWindowHotkey.hasClass('active')) {
+								if(e.keyCode == 37) {
+									$('#key-left').addClass('triggered');
+								}
+
+								if(e.keyCode == 65) {
+									$('#key-a').addClass('triggered');
+								}
+							}
 							// streamListUserReset();
 							iconMenu.toggleClass('active-on');
 							streamerList.removeClass('active scroll').css('left', 0);
@@ -324,6 +375,15 @@ $(document).ready(function(){
 
 					// "Enter" / "E" to Activate Selected User's Stream
 						if(e.keyCode == 13 || e.keyCode == 69) {
+							if(modalWindowHotkey.hasClass('active')) {
+								if(e.keyCode == 13) {
+									$('#key-enter').addClass('triggered');
+								}
+
+								if(e.keyCode == 69) {
+									$('#key-e').addClass('triggered');
+								}
+							}
 							if(streamerList.hasClass('active')) {
 								var user = streamerList.find('li.selected');
 								var userID = user.data('user');
@@ -334,6 +394,9 @@ $(document).ready(function(){
 
 					// "C" for Chat
 						if(e.keyCode == 67) {
+							if(modalWindowHotkey.hasClass('active')) {
+								$('#key-c').addClass('triggered');
+							}
 							chatTrigger();			
 						}
 
@@ -348,10 +411,21 @@ $(document).ready(function(){
 						
 					// "F" for Fullscreen Mode
 						if(e.keyCode == 70) {
+							if(modalWindowHotkey.hasClass('active')) {
+								$('#key-f').addClass('triggered');
+							}
 							fullscreenTrigger();
 						}
 
-						// console.log(e.keyCode);
+					// "H" for Help Window
+						if(e.keyCode == 72) {
+							if(modalWindowHotkey.hasClass('active')) {
+								$('#key-h').addClass('triggered');
+							}
+							modalHotkey();
+						}
+
+					console.log(e.keyCode);
 
 					// if (e.keyCode == 83) {
 					// 	if(!$('#streamer-search').hasClass('show')) {
@@ -360,6 +434,12 @@ $(document).ready(function(){
 					// 		$('#streamer-search').hide().removeClass('show');
 					// 	}
 					// }
+				});
+
+				$(document).on('keyup', function(e) {
+					if(modalWindowHotkey.hasClass('active')) {
+						modalWindowHotkey.find('i').removeClass('triggered');					
+					}
 				});
 		});
 
@@ -399,6 +479,15 @@ $(document).ready(function(){
 
 		iconFS.on('click',function() {
 			fullscreenTrigger();
+		});
+
+		iconHK.on('click', function(){
+			modalHotkey();
+		})
+
+		theShade.on('click', function(){
+			$(this).removeClass('active');
+			theModal.removeClass('active');
 		});
 
 		// exitPage();

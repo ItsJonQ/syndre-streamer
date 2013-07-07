@@ -6,8 +6,9 @@
 		<div class="header-ele the-logo left sep"><h1><span class="highlight-text">Syndre</span></h1> Beta</div>
 		<div class="header-ele watching"><div class="now-watching"></div><div class="stream-title"></div></div>
 		<div class="header-ele cutoff"></div>
-		<div class="header-ele icons-options right sep">
-			<div class="option chat action"><i class="icon-bubble" title="Toggle Stream Chat"></i></div>
+		<div class="header-ele icons-options right">
+			<div class="option chat action right sep"><i class="icon-bubble" title="Toggle Stream Chat"></i></div>
+			<div class="option hotkeys action right sep"><i class="text-icon" title="Show Syndre Hotkeys">Hotkeys</i></div>
 		</div>	
 	</div>
 </header>
