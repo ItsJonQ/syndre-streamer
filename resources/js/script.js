@@ -203,10 +203,10 @@ $(document).ready(function(){
 		playerRace = function() {
 
 			// Terran Players
-				var terran = '.avilo, .demuslim, .dragon, .liquidtaeja, .painuser, .selectkr, .sterlingkolde';
+				var terran = '.avilo, .brentstarcraft, .demuslim, .dragon, .gamegene, .liquidtaeja, .painuser, .selectkr, .squishy88, .sterlingkolde';
 
 			// Protoss Players
-				var protoss = '.axeltoss, .incontroltv, .liquidhero, .kuroa1, .puckk, .wayne379, .weedamins';
+				var protoss = '.axeltoss, .dreadnoughtt, .finalmastery, .incontroltv, .liquidhero, .kuroa1, .puckk, .wayne379, .weedamins';
 
 			// Zerg Players
 				var zerg = '.armzi, .idrajit, .kawaiirice, .massansc, .protech, .tilea';
