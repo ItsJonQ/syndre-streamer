@@ -1,3 +1,6 @@
+<?php
+	require('functions.php');
+?>
 <html>
 <head>
 	<title>Syndre - Starcraft II HOTS Twitch Streamer</title>
@@ -10,4 +13,4 @@
 	<link rel="stylesheet" type="text/css" href="resources/css/style.css">
 	<link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:400,700' rel='stylesheet' type='text/css'>
 </head>
-<body>
+<body class="<?php deviceClass(); ?>">

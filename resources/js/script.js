@@ -1,16 +1,20 @@
 $(document).ready(function(){
 
+	superDebugMode = false;
 	debugMode = false;
 	var initialLoadTime = new Date();
 
 	// Debug Mode
-		// debugMode = true; // Uncomment This to Activate Debug Mode
+		// superDebugMode = true;
+		debugMode = true;
 
 		debugEle = '<div class="debug db-message">Debug Mode is On</div>';
 		// Debug Mode Properties
+			if(superDebugMode == true ) { console.log('SUPER Debug Mode is On!'); }
 			if(debugMode == true ) { console.log('Debug Mode is On!'); }
 		
 	// Defining Global Variables
+		theBody = $('body');
 		theHeader = $('#header');
 		streamWrap = $('#stream-wrapper');
 		streamerList = $('#streamer-list');
@@ -27,29 +31,36 @@ $(document).ready(function(){
 		iconRefresh = $('.option.refresh');
 		iconFS = $('.option.fullscreen');
 
+
+	// Reserving Functions and Features for Desktop Only
+	if(theBody.hasClass('desktop')) {
+
 	// Defining Global Functions
 		twitchHots = function() {
-			var initialLoadTime = new Date();
-			var twitchHots_api = 'http://api.justin.tv/api/stream/list.json?meta_game=StarCraft%20II:%20Heart%20of%20the%20Swarm&limit=25&jsonp=?';
-			$.getJSON(twitchHots_api, function(data) {
-				$.each(data,function(i, data) {
-					var user = data.channel.login;
-					var twitch_live_view_count = data.channel_count;
-					var stream_title = data.title;
-					streamerList.find('ul').append('<li id="'+twitch_live_view_count+'" data-user="'+user+'" data-stream-title="'+stream_title+'" class="'+user+'">'+user+'<span class="view-count">'+twitch_live_view_count+'</span></li>');
-				});
-			})
-			.done(function(){
-				var currentUser = $('.watching').find('.streamer').text();
-				if(currentUser.length) {
-					streamerList.find('.'+currentUser).addClass('selected');
-				}
-				streamUserClick();
-				if(debugMode == true) {
-					var loadTime = new Date();
-					console.log('Twitch API fetch was successful. ('+ (loadTime - initialLoadTime) + 'ms)');
-				}
-			});
+			if(superDebugMode == false) {
+				var initialLoadTime = new Date();
+				var twitchHots_api = 'http://api.justin.tv/api/stream/list.json?meta_game=StarCraft%20II:%20Heart%20of%20the%20Swarm&limit=25&jsonp=?';
+				$.getJSON(twitchHots_api, function(data) {
+					$.each(data,function(i, data) {
+						var user = data.channel.login;
+						var twitch_live_view_count = data.channel_count;
+						var stream_title = data.title;
+						streamerList.find('ul').append('<li id="'+twitch_live_view_count+'" data-user="'+user+'" data-stream-title="'+stream_title+'" class="'+user+'">'+user+'<span class="view-count">'+twitch_live_view_count+'</span></li>');
+					});
+				})
+				.done(function(){
+					var currentUser = $('.watching').find('.streamer').text();
+					if(currentUser.length) {
+						streamerList.find('.'+currentUser).addClass('selected');
+					}
+					streamUserClick();
+					if(debugMode == true) {
+						var loadTime = new Date();
+						console.log('Twitch API fetch was successful. ('+ (loadTime - initialLoadTime) + 'ms)');
+					}
+					playerRace();
+				});				
+			}
 		}
 
 		twitchEmbed = function(username) {
@@ -67,17 +78,18 @@ $(document).ready(function(){
 		}
 
 		twitchChat = function() {
-			var user = $('.watching').find('.streamer').text();
-			var chat_embed_code = '<iframe frameborder="0" scrolling="no" id="chat_embed" src="http://twitch.tv/chat/embed?channel='+user+'&amp;popout_chat=true" height="100%" width="300"></iframe></div></div>';
-			var tChat = theSidebar.find('.twitch-chat');
-			tChat.find('.widget-header').html('<span class="highlight-text">'+user+'</span> Twitch Chat');
-			if(debugMode == false) {
-				tChat.find('.widget-body').html(chat_embed_code);
-			} else {
-				tChat.find('.widget-body').html(debugEle);
-				console.log('Twitch chat for '+user+' embed was successful.');
+			if(superDebugMode == false) {
+				var user = $('.watching').find('.streamer').text();
+				var chat_embed_code = '<iframe frameborder="0" scrolling="no" id="chat_embed" src="http://twitch.tv/chat/embed?channel='+user+'&amp;popout_chat=true" height="100%" width="300"></iframe></div></div>';
+				var tChat = theSidebar.find('.twitch-chat');
+				tChat.find('.widget-header').html('<span class="highlight-text">'+user+'</span> Twitch Chat');
+				if(debugMode == false) {
+					tChat.find('.widget-body').html(chat_embed_code);
+				} else {
+					tChat.find('.widget-body').html(debugEle);
+					console.log('Twitch chat for '+user+' embed was successful.');
+				}				
 			}
-			
 		}
 
 		streamInject = function(ele, user, title) {
@@ -172,6 +184,37 @@ $(document).ready(function(){
 			$(window).bind('beforeunload', function(){
 				return "This message popped up to counter potential accidental clickage.";
 			});
+
+		}
+
+	// Global Function for Player Race Detection
+		playerRace = function() {
+
+			// Terran Players
+				var terran = '.avilo, .demuslim, .painuser, .selectkr';
+
+			// Protoss Players
+				var protoss = '.axeltoss, .incontroltv, .liquidhero, .puckk';
+
+			// Zerg Players
+				var zerg = '.idrait';
+
+			streamerList.find('li').each(function(){
+				if($(this).is(terran)) {
+					$(this).addClass('player-race race-terran');
+					if(debugMode == true) { console.log('Terran player was identified.'); }
+				}
+				if($(this).is(protoss)) {
+					$(this).addClass('player-race race-protoss');
+					if(debugMode == true) { console.log('Protoss player was identified.'); }
+				}
+				if($(this).is(zerg)) {
+					$(this).addClass('player-race race-zerg');
+					if(debugMode == true) { console.log('Zerg player was identified.'); }
+				}
+			})
+
+			if(debugMode == true) { console.log('Player race filter activated.'); }
 
 		}
 
@@ -381,5 +424,5 @@ $(document).ready(function(){
 	        });			
 		}
         $.idleTimer(idleTimeout);
-
+    }
 });

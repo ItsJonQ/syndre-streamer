@@ -240,6 +240,7 @@
 	}
 
 	#streamer-list li {
+		border-bottom: 1px solid #191919;
 		line-height: 1;
 		padding: 10px 15px;
 	}
@@ -316,6 +317,7 @@
 	}
 
 /* Fullscreen Option */
+
 	.fullscreen-trigger {
 		position: fixed;
 		bottom: 30px;
@@ -377,6 +379,33 @@
 		text-align: center;
 		text-transform: uppercase;
 		top: 50%;
+	}
+
+/* Player Races */
+
+	.player-race:after {
+		color: #666;
+		content: '';
+		font-weight: bold;
+		display: inline;
+		position: absolute;
+		right: 10px;
+	}
+
+	.player-race.race-terran:after {
+		content: '[ T ]';
+	}
+
+	.player-race.race-protoss:after {
+		content: '[ P ]';
+	}
+
+	.player-race.race-zerg:after {
+		content: '[ Z ]';
+	}
+
+	.player-race:hover:after {
+		color: black;
 	}
 
 /* Upcoming Features */
