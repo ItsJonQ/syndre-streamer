@@ -203,13 +203,13 @@ $(document).ready(function(){
 		playerRace = function() {
 
 			// Terran Players
-				var terran = '.avilo, .demuslim, .dragon, .painuser, .selectkr, .sterlingkolde';
+				var terran = '.avilo, .demuslim, .dragon, .liquidtaeja, .painuser, .selectkr, .sterlingkolde';
 
 			// Protoss Players
-				var protoss = '.axeltoss, .incontroltv, .liquidhero, .puckk, .weedamins';
+				var protoss = '.axeltoss, .incontroltv, .liquidhero, .kuroa1, .puckk, .weedamins';
 
 			// Zerg Players
-				var zerg = '.armzi, .idrajit, .protech';
+				var zerg = '.armzi, .idrajit, .mannansc, .protech';
 
 			streamerList.find('li').each(function(){
 				if($(this).is(terran)) {

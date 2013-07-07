@@ -1,11 +1,15 @@
 <?php
 	require('functions.php');
 ?>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
+	<meta http-equiv="content-type" content="text/html;charset=utf-8"/>
 	<title>Syndre - Starcraft II HOTS Twitch Streamer</title>
+
 	<link rel="canonical" href="http://www.syndre.net/">
 	<meta name="description" content="A Twitch based web-app where you can seamlessly browse and watch the top Starcraft II HOTS streams."/>
+
 	<script type="text/javascript" src="resources/js/jquery.js"></script>
 	<script type="text/javascript" src="resources/js/jquery.idle-timer.js"></script>
 	<script type="text/javascript" src="resources/js/script.js"></script>
