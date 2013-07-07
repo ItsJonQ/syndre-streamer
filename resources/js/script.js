@@ -343,7 +343,7 @@ $(document).ready(function(){
 							if(streamerList.hasClass('active')) {
 								scrollOffset('down');
 							} else {
-								streamInject(nextUser, userID, title);d
+								streamInject(nextUser, userID, title);
 							}
 						}
 					}
