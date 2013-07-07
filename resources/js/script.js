@@ -143,10 +143,8 @@ $(document).ready(function(){
 			theSidebar.toggleClass('hidden');
 			if(streamWrap.hasClass(sa)) {
 				fsTrigger.css('right', saNum + fsNum);
-				console.log('yes');
 			} else {
 				fsTrigger.css('right', fsNum);
-				console.log('no');
 			}
 		}
 
