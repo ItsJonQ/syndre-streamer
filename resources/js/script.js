@@ -213,10 +213,10 @@ $(document).ready(function(){
 		playerRace = function() {
 
 			// Terran Players
-				var terran = '.avilo, .brentstarcraft, .colthestc, .demuslim, .dragon, .gamegene, .liquidtaeja, .painuser, .selectkr, .squishy88, .sterlingkolde';
+				var terran = '.avilo, .brentstarcraft, .colthestc, .demuslim, .dragon, .gamegene, .htomario, .liquidtaeja, .painuser, .sc2sound, .selectkr, .squishy88, .sterlingkolde, .tumescentpie';
 
 			// Protoss Players
-				var protoss = '.axeltoss, .crimson_sc2, .dreadnoughtt, .finalmastery, .followgrubby, .incontroltv, .naniwasc2, .liquidhero, .kuroa1, .puckk, .tarrantius, .wayne379, .weedamins';
+				var protoss = '.axeltoss, .crimson_sc2, .dreadnoughtt, .finalmastery, .followgrubby, .incontroltv, .naniwasc2, .liquidhero, .kuroa1, .puckk, .tarrantius, .torkhots, .wayne379, .weedamins, .whitera';
 
 			// Zerg Players
 				var zerg = '.armzi, .bexysc, .dimaga, .empiretvpeptar, .empiretvzerg, .idrajit, .kawaiirice, .liquidtlo, .massansc, .protech, .tilea, .wiredguitars';
