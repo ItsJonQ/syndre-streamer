@@ -11,7 +11,7 @@ $(document).ready(function(){
 
 		debugEle = '<div class="debug db-message">Debug Mode is On</div>';
 		// Debug Mode Properties
-			// if(superDebugMode == true ) { console.log('SUPER Debug Mode is On!'); }
+			if(superDebugMode == true ) { console.log('SUPER Debug Mode is On!'); }
 			if(debugMode == true ) { console.log('Debug Mode is On!'); }
 		
 	// Defining Global Variables
@@ -36,8 +36,7 @@ $(document).ready(function(){
 		iconHK = $('.option.hotkeys');
 
 		modalWindowHotkey = $('.window-help');
-
-
+			
 	// Reserving Functions and Features for Desktop Only
 	if(theBody.hasClass('desktop')) {
 
@@ -75,6 +74,9 @@ $(document).ready(function(){
 		}
 
 		twitchEmbed = function(username) {
+			var chatState = 'on'
+			if(streamWrap.hasClass('chat-active')) { var chatState = 'on'; }
+			history.pushState(null, null, '#!/user=' + username);
 			var start = '&auto_play=true';
 			var width = '1920';
 			var height = '1080';
@@ -86,6 +88,7 @@ $(document).ready(function(){
 				streamArea.html(debugEle);
 				console.log('Twitch stream embed for '+username+' was successful.');
 			}
+
 		}
 
 		twitchChat = function() {
@@ -142,10 +145,11 @@ $(document).ready(function(){
 
 		chatTrigger = function() {
 			var sa = 'sidebar-active';
+			var wc = 'widget-chat';
 			var saNum = 301;
 			var fsNum = 15;
 			iconChat.toggleClass('active-on');
-			streamWrap.toggleClass(sa);
+			streamWrap.toggleClass(sa).toggleClass(wc);
 			theSidebar.toggleClass('hidden');
 			if(streamWrap.hasClass(sa)) {
 				fsTrigger.css('right', saNum + fsNum);
@@ -215,7 +219,7 @@ $(document).ready(function(){
 				var protoss = '.axeltoss, .crimson_sc2, .dreadnoughtt, .finalmastery, .followgrubby, .incontroltv, .naniwasc2, .liquidhero, .kuroa1, .puckk, .tarrantius, .wayne379, .weedamins';
 
 			// Zerg Players
-				var zerg = '.armzi, .bexysc, .dimaga, .empiretvpeptar, .empiretvzerg, .idrajit, .kawaiirice, .massansc, .protech, .tilea, .wiredguitars';
+				var zerg = '.armzi, .bexysc, .dimaga, .empiretvpeptar, .empiretvzerg, .idrajit, .kawaiirice, .liquidtlo, .massansc, .protech, .tilea, .wiredguitars';
 
 			streamerList.find('li').each(function(){
 				if($(this).is(terran)) {
@@ -307,6 +311,7 @@ $(document).ready(function(){
 						var title = prevUser.data('stream-title');
 						if(!streamerList.find('li.selected').is(':first-child')) {
 							streamerList.find('li.selected').removeClass('selected');
+							streamerLi.blur();
 							prevUser.addClass('selected').focus();
 							if(streamerList.hasClass('active')) {
 								scrollOffset('up');
@@ -333,6 +338,7 @@ $(document).ready(function(){
 						var title = nextUser.data('stream-title');
 						if(!streamerList.find('li.selected').is(':last-child')) {
 							streamerList.find('li.selected').removeClass('selected');
+							streamerLi.blur();
 							nextUser.addClass('selected').focus();
 							if(streamerList.hasClass('active')) {
 								scrollOffset('down');
@@ -354,6 +360,7 @@ $(document).ready(function(){
 							}
 						}
 						// streamListUserReset();
+						streamerLi.blur();
 						iconMenu.toggleClass('active-on');
 						streamerList.addClass('active');
 					}
@@ -370,6 +377,7 @@ $(document).ready(function(){
 							}
 						}
 						// streamListUserReset();
+						streamerLi.blur();
 						iconMenu.toggleClass('active-on');
 						streamerList.removeClass('active scroll').css('left', 0);
 					}
@@ -389,6 +397,8 @@ $(document).ready(function(){
 							var user = streamerList.find('li.selected');
 							var userID = user.data('user');
 							var title = user.data('stream-title');
+							streamerLi.blur();
+							user.focus();
 							streamInject(user, userID, title);
 						}
 					}
@@ -426,7 +436,7 @@ $(document).ready(function(){
 						modalHotkey();
 					}
 
-				console.log(e.keyCode);
+				if(debugMode == true) { console.log(e.keyCode); }
 
 				// if (e.keyCode == 83) {
 				// 	if(!$('#streamer-search').hasClass('show')) {
