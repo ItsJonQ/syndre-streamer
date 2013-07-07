@@ -212,10 +212,10 @@ $(document).ready(function(){
 				var terran = '.avilo, .brentstarcraft, .demuslim, .dragon, .gamegene, .liquidtaeja, .painuser, .selectkr, .squishy88, .sterlingkolde';
 
 			// Protoss Players
-				var protoss = '.axeltoss, .dreadnoughtt, .finalmastery, .incontroltv, .liquidhero, .kuroa1, .puckk, .wayne379, .weedamins';
+				var protoss = '.axeltoss, .dreadnoughtt, .finalmastery, .incontroltv, .naniwasc2, .liquidhero, .kuroa1, .puckk, .wayne379, .weedamins';
 
 			// Zerg Players
-				var zerg = '.armzi, .idrajit, .kawaiirice, .massansc, .protech, .tilea';
+				var zerg = '.armzi, .idrajit, .kawaiirice, .massansc, .protech, .tilea, .wiredguitars';
 
 			streamerList.find('li').each(function(){
 				if($(this).is(terran)) {
