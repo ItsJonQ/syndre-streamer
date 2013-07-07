@@ -3,6 +3,7 @@ $(document).ready(function(){
 	superDebugMode = false;
 	debugMode = false;
 	var initialLoadTime = new Date();
+	urlPathname = window.location.href;
 
 	// Debug Mode
 		// superDebugMode = true;
@@ -43,8 +44,13 @@ $(document).ready(function(){
 	// Defining Global Functions
 		twitchHots = function() {
 			if(superDebugMode == false) {
+				var metagame = 'StarCraft%20II:%20Heart%20of%20the%20Swarm';
+				if(urlPathname.search('lol') >= 0) {
+					document.title = 'Syndre - League of Legends Twitch Streamer';
+					var metagame = 'League%20of%20Legends';
+				}
 				var initialLoadTime = new Date();
-				var twitchHots_api = 'http://api.justin.tv/api/stream/list.json?meta_game=StarCraft%20II:%20Heart%20of%20the%20Swarm&limit=25&jsonp=?';
+				var twitchHots_api = 'http://api.justin.tv/api/stream/list.json?meta_game='+metagame+'&limit=25&jsonp=?';
 				$.getJSON(twitchHots_api, function(data) {
 					$.each(data,function(i, data) {
 						var user = data.channel.login;
@@ -230,215 +236,220 @@ $(document).ready(function(){
 
 		}
 
+	// Load Sequence Functions
+
+	loadSequenceFunctions = function() {	
+		if(debugMode == true) { 
+			var loadTime = new Date();
+			console.log('Window has loaded successfully. ('+ (loadTime - initialLoadTime) + 'ms)'); 
+		}
+
+		// Get The First User's Information
+			var first = streamerList.find('li').first();
+			var user_first = first.data('user');
+			var title_first = first.data('stream-title');
+
+		// Embed the First User's Stream
+			first.addClass('selected');
+			streamInject(first, user_first, title_first);
+			streamUserClick();
+
+		// Defining Key Press Functions
+			var streamListUserReset = function() {
+				var currentUser = $('.watching').find('.streamer').text();
+				streamerList.find('li').removeClass('selected');
+				streamerList.find('.'+currentUser).addClass('selected');
+			}
+
+			var scrollCounter = 0;
+
+			var scrollOffset = function(direction){
+				var a = streamerList.find('li.selected');
+				var b = streamerList.find('ul');
+				var p = a.prevAll();
+				var ps = p.size();
+				var h = 32;
+				if(direction == 'up') {
+					if( a.offset().top < 70 ) {
+						b.scrollTop(ps * h - h);
+						if(debugMode == true) { console.log('Scroll offset "Up" was successful.'); }
+					} else if (ps == 0) {
+						b.scrollTop(0);
+						if(debugMode == true) { console.log('Scroll offset "Up - Reset" was successful.'); }
+					}
+				} else if (direction == 'down') {
+					if( a.offset().top > b.height()) {
+						scrollCounter++;
+						b.scrollTop(h * scrollCounter);
+						if(debugMode == true) { console.log('Scroll offset "Down" was successful.'); }
+					}
+				} else {
+					return false;
+				}
+				
+			}
+
+			$(document).on('keydown', function(e) {
+
+				// "Up" / "W" for Previous
+					if(e.keyCode == 38 || e.keyCode == 87) {
+						if(modalWindowHotkey.hasClass('active')) {
+							if(e.keyCode == 38) {
+								$('#key-up').addClass('triggered');
+							}
+
+							if(e.keyCode == 87) {
+								$('#key-w').addClass('triggered');
+							}							
+						}
+						var prevUser = streamerList.find('li.selected').prev()
+						var userID = prevUser.data('user');
+						var title = prevUser.data('stream-title');
+						if(!streamerList.find('li.selected').is(':first-child')) {
+							streamerList.find('li.selected').removeClass('selected');
+							prevUser.addClass('selected').focus();
+							if(streamerList.hasClass('active')) {
+								scrollOffset('up');
+							} else {
+								streamInject(prevUser, userID, title);
+							}	
+						}
+					}
+					
+
+				// "Down" / "S" for Next
+					if(e.keyCode == 40 || e.keyCode == 83) {
+						if(modalWindowHotkey.hasClass('active')) {
+							if(e.keyCode == 40) {
+								$('#key-down').addClass('triggered');
+							}
+
+							if(e.keyCode == 83) {
+								$('#key-s').addClass('triggered');
+							}							
+						}
+						var nextUser = streamerList.find('li.selected').next();
+						var userID = nextUser.data('user');
+						var title = nextUser.data('stream-title');
+						if(!streamerList.find('li.selected').is(':last-child')) {
+							streamerList.find('li.selected').removeClass('selected');
+							nextUser.addClass('selected').focus();
+							if(streamerList.hasClass('active')) {
+								scrollOffset('down');
+							} else {
+								streamInject(nextUser, userID, title);d
+							}
+						}
+					}
+
+				// "Right" / "D" to Show Stream Menu
+					if(e.keyCode == 39 || e.keyCode == 68) {
+						if(modalWindowHotkey.hasClass('active')) {
+							if(e.keyCode == 39) {
+								$('#key-right').addClass('triggered');
+							}
+
+							if(e.keyCode == 68) {
+								$('#key-d').addClass('triggered');
+							}
+						}
+						// streamListUserReset();
+						iconMenu.toggleClass('active-on');
+						streamerList.addClass('active');
+					}
+
+				// "Left" / "A" to Hide Stream Menu
+					if(e.keyCode == 37 || e.keyCode == 65) {
+						if(modalWindowHotkey.hasClass('active')) {
+							if(e.keyCode == 37) {
+								$('#key-left').addClass('triggered');
+							}
+
+							if(e.keyCode == 65) {
+								$('#key-a').addClass('triggered');
+							}
+						}
+						// streamListUserReset();
+						iconMenu.toggleClass('active-on');
+						streamerList.removeClass('active scroll').css('left', 0);
+					}
+
+				// "Enter" / "E" to Activate Selected User's Stream
+					if(e.keyCode == 13 || e.keyCode == 69) {
+						if(modalWindowHotkey.hasClass('active')) {
+							if(e.keyCode == 13) {
+								$('#key-enter').addClass('triggered');
+							}
+
+							if(e.keyCode == 69) {
+								$('#key-e').addClass('triggered');
+							}
+						}
+						if(streamerList.hasClass('active')) {
+							var user = streamerList.find('li.selected');
+							var userID = user.data('user');
+							var title = user.data('stream-title');
+							streamInject(user, userID, title);
+						}
+					}
+
+				// "C" for Chat
+					if(e.keyCode == 67) {
+						if(modalWindowHotkey.hasClass('active')) {
+							$('#key-c').addClass('triggered');
+						}
+						chatTrigger();			
+					}
+
+				// "R" for Refresh List
+					if(debugMode == true) {
+						if(e.keyCode == 82) {
+							if(streamerList.hasClass('active')) {
+								streamListRefresh();
+							}
+						}
+					}
+					
+				// "F" for Fullscreen Mode
+					if(e.keyCode == 70) {
+						if(modalWindowHotkey.hasClass('active')) {
+							$('#key-f').addClass('triggered');
+						}
+						fullscreenTrigger();
+					}
+
+				// "H" for Help Window
+					if(e.keyCode == 72) {
+						if(modalWindowHotkey.hasClass('active')) {
+							$('#key-h').addClass('triggered');
+						}
+						modalHotkey();
+					}
+
+				console.log(e.keyCode);
+
+				// if (e.keyCode == 83) {
+				// 	if(!$('#streamer-search').hasClass('show')) {
+				// 		$('#streamer-search').show().addClass('show');
+				// 	} else {
+				// 		$('#streamer-search').hide().removeClass('show');
+				// 	}
+				// }
+			});
+
+			$(document).on('keyup', function(e) {
+				if(modalWindowHotkey.hasClass('active')) {
+					modalWindowHotkey.find('i').removeClass('triggered');					
+				}
+			});
+	}
+
 	// Execute Initial Functions on Page Load
 
 		twitchHots();
 		
 		$(window).load(function(){
-
-			if(debugMode == true) { 
-				var loadTime = new Date();
-				console.log('Window has loaded successfully. ('+ (loadTime - initialLoadTime) + 'ms)'); 
-			}
-
-			// Get The First User's Information
-				var first = streamerList.find('li').first();
-				var user_first = first.data('user');
-				var title_first = first.data('stream-title');
-
-			// Embed the First User's Stream
-				first.addClass('selected');
-				streamInject(first, user_first, title_first);
-				streamUserClick();
-
-			// Defining Key Press Functions
-				var streamListUserReset = function() {
-					var currentUser = $('.watching').find('.streamer').text();
-					streamerList.find('li').removeClass('selected');
-					streamerList.find('.'+currentUser).addClass('selected');
-				}
-
-				var scrollCounter = 0;
-
-				var scrollOffset = function(direction){
-					var a = streamerList.find('li.selected');
-					var b = streamerList.find('ul');
-					var p = a.prevAll();
-					var ps = p.size();
-					var h = 32;
-					if(direction == 'up') {
-						if( a.offset().top < 70 ) {
-							b.scrollTop(ps * h - h);
-							if(debugMode == true) { console.log('Scroll offset "Up" was successful.'); }
-						} else if (ps == 0) {
-							b.scrollTop(0);
-							if(debugMode == true) { console.log('Scroll offset "Up - Reset" was successful.'); }
-						}
-					} else if (direction == 'down') {
-						if( a.offset().top > b.height()) {
-							scrollCounter++;
-							b.scrollTop(h * scrollCounter);
-							if(debugMode == true) { console.log('Scroll offset "Down" was successful.'); }
-						}
-					} else {
-						return false;
-					}
-					
-				}
-
-				$(document).on('keydown', function(e) {
-
-					// "Up" / "W" for Previous
-						if(e.keyCode == 38 || e.keyCode == 87) {
-							if(modalWindowHotkey.hasClass('active')) {
-								if(e.keyCode == 38) {
-									$('#key-up').addClass('triggered');
-								}
-
-								if(e.keyCode == 87) {
-									$('#key-w').addClass('triggered');
-								}							
-							}
-							var prevUser = streamerList.find('li.selected').prev()
-							var userID = prevUser.data('user');
-							var title = prevUser.data('stream-title');
-							if(!streamerList.find('li.selected').is(':first-child')) {
-								streamerList.find('li.selected').removeClass('selected');
-								prevUser.addClass('selected').focus();
-								if(streamerList.hasClass('active')) {
-									scrollOffset('up');
-								} else {
-									streamInject(prevUser, userID, title);
-								}	
-							}
-						}
-						
-
-					// "Down" / "S" for Next
-						if(e.keyCode == 40 || e.keyCode == 83) {
-							if(modalWindowHotkey.hasClass('active')) {
-								if(e.keyCode == 40) {
-									$('#key-down').addClass('triggered');
-								}
-
-								if(e.keyCode == 83) {
-									$('#key-s').addClass('triggered');
-								}							
-							}
-							var nextUser = streamerList.find('li.selected').next();
-							var userID = nextUser.data('user');
-							var title = nextUser.data('stream-title');
-							if(!streamerList.find('li.selected').is(':last-child')) {
-								streamerList.find('li.selected').removeClass('selected');
-								nextUser.addClass('selected').focus();
-								if(streamerList.hasClass('active')) {
-									scrollOffset('down');
-								} else {
-									streamInject(nextUser, userID, title);d
-								}
-							}
-						}
-
-					// "Right" / "D" to Show Stream Menu
-						if(e.keyCode == 39 || e.keyCode == 68) {
-							if(modalWindowHotkey.hasClass('active')) {
-								if(e.keyCode == 39) {
-									$('#key-right').addClass('triggered');
-								}
-
-								if(e.keyCode == 68) {
-									$('#key-d').addClass('triggered');
-								}
-							}
-							// streamListUserReset();
-							iconMenu.toggleClass('active-on');
-							streamerList.addClass('active');
-						}
-
-					// "Left" / "A" to Hide Stream Menu
-						if(e.keyCode == 37 || e.keyCode == 65) {
-							if(modalWindowHotkey.hasClass('active')) {
-								if(e.keyCode == 37) {
-									$('#key-left').addClass('triggered');
-								}
-
-								if(e.keyCode == 65) {
-									$('#key-a').addClass('triggered');
-								}
-							}
-							// streamListUserReset();
-							iconMenu.toggleClass('active-on');
-							streamerList.removeClass('active scroll').css('left', 0);
-						}
-
-					// "Enter" / "E" to Activate Selected User's Stream
-						if(e.keyCode == 13 || e.keyCode == 69) {
-							if(modalWindowHotkey.hasClass('active')) {
-								if(e.keyCode == 13) {
-									$('#key-enter').addClass('triggered');
-								}
-
-								if(e.keyCode == 69) {
-									$('#key-e').addClass('triggered');
-								}
-							}
-							if(streamerList.hasClass('active')) {
-								var user = streamerList.find('li.selected');
-								var userID = user.data('user');
-								var title = user.data('stream-title');
-								streamInject(user, userID, title);
-							}
-						}
-
-					// "C" for Chat
-						if(e.keyCode == 67) {
-							if(modalWindowHotkey.hasClass('active')) {
-								$('#key-c').addClass('triggered');
-							}
-							chatTrigger();			
-						}
-
-					// "R" for Refresh List
-						if(debugMode == true) {
-							if(e.keyCode == 82) {
-								if(streamerList.hasClass('active')) {
-									streamListRefresh();
-								}
-							}
-						}
-						
-					// "F" for Fullscreen Mode
-						if(e.keyCode == 70) {
-							if(modalWindowHotkey.hasClass('active')) {
-								$('#key-f').addClass('triggered');
-							}
-							fullscreenTrigger();
-						}
-
-					// "H" for Help Window
-						if(e.keyCode == 72) {
-							if(modalWindowHotkey.hasClass('active')) {
-								$('#key-h').addClass('triggered');
-							}
-							modalHotkey();
-						}
-
-					console.log(e.keyCode);
-
-					// if (e.keyCode == 83) {
-					// 	if(!$('#streamer-search').hasClass('show')) {
-					// 		$('#streamer-search').show().addClass('show');
-					// 	} else {
-					// 		$('#streamer-search').hide().removeClass('show');
-					// 	}
-					// }
-				});
-
-				$(document).on('keyup', function(e) {
-					if(modalWindowHotkey.hasClass('active')) {
-						modalWindowHotkey.find('i').removeClass('triggered');					
-					}
-				});
+			loadSequenceFunctions();
 		});
 
 	// Defining Mouse Action Functions
