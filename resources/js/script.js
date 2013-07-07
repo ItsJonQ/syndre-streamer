@@ -6,7 +6,7 @@ $(document).ready(function(){
 
 	// Debug Mode
 		// superDebugMode = true;
-		debugMode = true;
+		// debugMode = true;
 
 		debugEle = '<div class="debug db-message">Debug Mode is On</div>';
 		// Debug Mode Properties
@@ -103,7 +103,6 @@ $(document).ready(function(){
 			theHeader.find('.now-watching').html('Now Watching <span class="streamer highlight-text">'+user+'</span>: ');
 			theHeader.find('.stream-title').html(title)
 			setTimeout(function(){ twitchChat(); }, 50);
-			streamWatching.show().delay(3000).fadeOut('fast');
 		}
 
 		streamListRefresh = function() {
