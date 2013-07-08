@@ -432,14 +432,6 @@ $(document).ready(function(){
 						chatTrigger();			
 					}
 
-<<<<<<< HEAD
-					// "R" for Refresh List
-						// if(e.keyCode == 82) {
-						// 	if(streamerList.hasClass('active')) {
-						// 		streamListRefresh();
-						// 	}
-						// }
-=======
 				// "R" for Refresh List
 					if(e.keyCode == 82) {
 						if(streamerList.hasClass('active')) {
@@ -458,7 +450,6 @@ $(document).ready(function(){
 						}
 						fullscreenTrigger();
 					}
->>>>>>> 4eac9778f1c86ef408629d356ba7f5f0e6446ac7
 
 				// "H" for Help Window
 					if(e.keyCode == 72) {
