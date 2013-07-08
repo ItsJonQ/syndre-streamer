@@ -1,303 +1,662 @@
-html,
-body {
-	background: black;
-	font-family: 'roboto condensed', 'HelveticaNeue-Condensed', 'Sans-Serif';
-	height: 100%;
-	margin: 0;
-	padding: 0;
-	position: relative;
-	width: 100%;
-}
+/* The Base */
+	html,
+	body {
+		background: black;
+		font-family: 'roboto condensed', 'HelveticaNeue-Condensed', 'Sans-Serif';
+		height: 100%;
+		margin: 0;
+		padding: 0;
+		position: relative;
+		width: 100%;
+	}
 
-body {
-	overflow: hidden;
-}
+	body {
+		overflow: hidden;
+	}
 
-.left {
-	float: left;
-}
+	div {
+		position: relative;
+	}
 
-.right {
-	float: right;
-}
+	ul,
+	li {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
 
-.hidden {
-	display: none;
-}
+	p {
+		margin: 0px 0px 1.5em;
+	}
 
-.highlight-text {
-	color: orangered;
-}
+	.left {
+		float: left;
+	}
 
-.action {
-	cursor: pointer;
-}
+	.right {
+		float: right;
+	}
 
-.header {
-	background: black;
-	border-bottom: 1px solid #333;
-	color: white;
-	font-size: 18px;
-	height: 35px;
-	left: 0;
-	overflow: hidden;
-	position: fixed;
-	text-transform: uppercase;
-	top: 0;
-	width: 100%;
-}
+	.center {
+		text-align: center;
+	}
 
-.header-elements {
-	overflow: hidden;
-	padding: 5px 10px;
-}
-
-.the-menu,
-.the-logo,
-.watching {
-	float: left;
-}
-
-.the-menu {
-	padding: 2px 0px;
-	margin-right: 10px;
-}
-
-.the-logo {
-	margin-right: 10px;
-}
-
-.watching {
-	color: #777;
-	font-size: 11px;
-	height: 24px;
-	line-height: 25px;
-	padding: 0px 0px;
-	max-width: 520px;
-	overflow: hidden;
-}
-
-.watching .streamer {
-	margin-left: 3px;
-}
-
-.watching .title {
-	color: #ccc;
-	position: relative;
-}
-
-.header .icons-options .option {
-	color: #666;
-	font-size: 14px;
-	height: 16px;
-	line-height: 1em;
-	margin: 5px 0px 0px 5px;
-	width: 16px;
-}
-
-.header .icons-options .option.active-on {
-	color: #fff;
-}
-
-.noclick {
-	width: 100%;
-	height: 100%;
-	position: fixed;
-	z-index: 3;
-	bottom: 50px;
-	left: 0px;
-}
-
-#stream-wrapper {
-	bottom: 0;
-	left: 0;
-	position: absolute;
-	right: 0;
-	top: 36px;
-}
-
-#streamer-list  {
-	background: rgba(0,0,0,0.8);
-	border-right: 1px solid rgba(255,255,255,0.4);
-	color: white;
-	display: none;
-	font-size: 12px;
-	left: 0;
-	margin: 0;
-	padding: 0;
-	position: fixed;
-	text-transform: uppercase;
-	top: 36px;
-	bottom: 28px;
-	z-index: 9999;
-}
-
-#streamer-list .list-header {
-	border-bottom: 1px solid #222;
-	color: #777;
-	left: 0;
-	padding: 8px 10px;
-	position: absolute;
-	right: 0;
-	top: 0;
-	width: auto;
-}
-
-#streamer-list .list-header:hover {
-	color: white;
-}
-
-#streamer-list ul {
-	cursor: pointer;
-	list-style: none;
-	overflow: hidden;
-	overflow-y: auto;
-	margin: 0;
-	padding: 0;
-	position: absolute;
-	opacity: 0.5;
-	top: 33px;
-	bottom: 0px;
-}
-
-#streamer-list li {
-	line-height: 1;
-	padding: 10px 15px;
-}
-
-#streamer-list li .view-count {
-	display: none;
-}
-
-#streamer-list.active {
-	display: block;
-	width: 210px;
-}
-
-#streamer-list.active li {
-	display: block;
-}
-
-#streamer-list:hover ul,
-#streamer-list.active ul {
-	opacity: 1;
-}
-
-#streamer-list.active ul {
-	min-width: 200px;
-	padding-right: 10px;
-}
-
-#streamer-list.active li.selected {
-	color: orangered;
-}
-
-#streamer-list.active li:hover {
-	background: orangered;
-	color: white;
-}
-
-#streamer-list li.selected {
-	color: white;
-}
-
-#streamer-search {
-	background: rgba(0,0,0,0.8);
-	width: 400px;
-	height: 200px;
-	position: fixed;
-	top: 50%;
-	left: 50%;
-	margin: -100px 0px 0px -200px;
-	display: none;
-	z-index: 99;
-}
-
-#streamer-watching {
-	background: black;
-	color: white;
-	display: none;
-	font-size: 32px;
-	left: 50%;
-	margin: -110px 0px 0px -250px;
-	position: fixed;
-	top: 50%;
-	width: 400px;
-	z-index: 99;
-	padding: 50px;
-	text-align: center;
-	text-transform: uppercase;
-}
-
-#streamer-watching span {
-	display: block;
-	line-height: 38px;
-}
-
-#streamer-watching span.title {
-	color: #ddd;
-	font-size: 13px;
-}
-
-#livestream {
-	bottom: 0;
-	left: 0;
-	margin: 0 auto;
-	position: absolute;
-	right: 0;
-	top: 0px;
-}
-
-#livestream object {
-	width: 100%;
-	height: 100%;
-}
-
-#sidebar {
-	border-left: 1px solid #222;
-	bottom: 0;
-	position: absolute;
-	right: 0;
-	top: 0px;
-	width: 300px;
-}
-
-#sidebar .side-widget {
-	bottom: 0;
-	left: 0;
-	position: absolute;
-	right: 0;
-	top: 0;
-}
-
-#sidebar .widget-header {
-	background: black;
-	color: #ddd;
-	font-size: 14px;
-	line-height: 1.2em;
-	overflow: hidden;
-	padding: 10px;
-	text-transform: uppercase;
-}
-
-#sidebar .widget-body {
-	bottom: 0;
-	left: 0;
-	position: absolute;
-	right: 0;
-	top: 36px;
-}
-
-#sidebar .twitch-chat iframe {
-	height: 100% !important;
-}
-
-#stream-wrapper.sidebar-active #livestream {
-	right: 301px;
-}
-
-@media all and (max-width : 680px) {
-	.watching .title {
+	.hidden {
 		display: none;
 	}
-}
+
+	.highlight-text {
+		color: orangered;
+	}
+
+	.action {
+		cursor: pointer;
+	}
+
+	.pos-abso {
+		bottom: 0;
+		left: 0;
+		position: absolute;
+		right: 0;
+		top: 0;
+	}
+
+	::-webkit-scrollbar {
+	    width: 10px;
+	}
+
+	::-webkit-scrollbar-track {
+		background: #111;
+		-webkit-border-radius: 0px;
+		-webkit-box-shadow: none;
+		border-radius: 0px;
+	}
+
+	::-webkit-scrollbar-thumb {
+	    -webkit-border-radius: 0px;
+	    border-radius: 0px;
+	    background: #333;
+	    -webkit-box-shadow: none; 
+	}
+
+	::-webkit-scrollbar-thumb:window-inactive {
+		background: #222; 
+	}
+
+/* The Type */
+	.fCaps {
+		text-transform: uppercase;
+	}
+
+	.fCenter {
+		text-align: center;
+	}
+
+/* The Wrapper */
+
+	#stream-wrapper {
+		top: 36px;
+	}
+
+	#stream-wrapper.sidebar-active #livestream {
+		right: 301px;
+	}
+
+/* The Grid */
+
+	.row {
+		margin-left: -20px;
+		*zoom: 1;
+	}
+
+	.row:before,
+	.row:after {
+		display: table;
+		line-height: 0;
+		content: "";
+	}
+
+	.row:after {
+		clear: both;
+	}
+
+	[class*="span"] {
+		float: left;
+		min-height: 1px;
+		margin-left: 20px;
+	}
+
+	.span12 {
+		width: 940px;
+	}
+
+	.span11 {
+		width: 860px;
+	}
+
+	.span10 {
+		width: 780px;
+	}
+
+	.span9 {
+		width: 700px;
+	}
+
+	.span8 {
+		width: 620px;
+	}
+
+	.span7 {
+		width: 540px;
+	}
+
+	.span6 {
+		width: 460px;
+	}
+
+	.span5 {
+		width: 380px;
+	}
+
+	.span4 {
+		width: 300px;
+	}
+
+	.span3 {
+		width: 220px;
+	}
+
+	.span2 {
+		width: 140px;
+	}
+
+	.span1 {
+		width: 60px;
+	}
+
+/*The Header*/
+
+	.header {
+		background: black;
+		border-bottom: 1px solid #333;
+		color: white;
+		font-size: 18px;
+		height: 35px;
+		left: 0;
+		overflow: hidden;
+		position: fixed;
+		text-transform: uppercase;
+		top: 0;
+		width: 100%;
+		z-index: 5;
+	}
+
+	/* The Header: Elements */
+
+		.header-elements {
+			overflow: hidden;
+			padding: 0px;
+		}
+
+		.header-ele {
+			float: left;
+			padding: 5px 0px;
+			margin-left: 0px;
+			margin-right: 10px;
+		}
+
+		.header-ele.right {
+			float: right;
+			margin-left: 10px;
+			margin-right: 0px;
+		}
+
+		.left.sep {
+			border-right: 1px solid #222;
+		}
+
+		.right.sep {
+			border-left: 1px solid #222;
+		}
+
+		.header-ele.icons-options {
+			padding: 0;
+		}
+
+	/* The Header: Menu & Logo */
+
+		.the-logo {
+			color: #ddd;
+			display: inline;
+			padding-right: 10px;
+		}
+
+		.the-logo h1 {
+			display: inline;
+			font-size: 18px;
+			font-weight: normal;
+			margin: 0;
+			padding: 0;
+		}
+
+	/* The Header: Stream Info */
+
+		.watching {
+			color: #777;
+			font-size: 11px;
+			height: 24px;
+			line-height: 25px;
+			overflow: hidden;
+		}
+
+		.watching .now-watching {
+			float: left;
+			margin-right: 3px;
+		}
+
+		.watching .streamer {
+			margin-left: 3px;
+		}
+
+		.watching .stream-title {
+			color: #ccc;
+			display: inline-block;
+			width: 400px;
+			overflow: hidden;
+			position: relative;
+			white-space: nowrap;
+		}
+
+		.watching .stream-title:after {
+			background: -moz-linear-gradient(left, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 100%); /* FF3.6+ */
+			background: -webkit-gradient(linear, left top, right top, color-stop(0%,rgba(0,0,0,0)), color-stop(100%,rgba(0,0,0,1))); /* Chrome,Safari4+ */
+			background: -webkit-linear-gradient(left, rgba(0,0,0,0) 0%,rgba(0,0,0,1) 100%); /* Chrome10+,Safari5.1+ */
+			background: -o-linear-gradient(left, rgba(0,0,0,0) 0%,rgba(0,0,0,1) 100%); /* Opera 11.10+ */
+			background: -ms-linear-gradient(left, rgba(0,0,0,0) 0%,rgba(0,0,0,1) 100%); /* IE10+ */
+			background: linear-gradient(to right, rgba(0,0,0,0) 0%,rgba(0,0,0,1) 100%); /* W3C */
+			filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#000000',GradientType=1 ); /* IE6-9 */
+			content:'';
+			position: absolute;
+			right: 0;
+			top: 0;
+			bottom: 0;
+			padding: 8px;
+			width: 40px;
+		}
+
+/*The Stream List */
+
+	#streamer-list  {
+		background: rgba(0,0,0,0.8);
+		border-right: 1px solid rgba(255,255,255,0.4);
+		bottom: 28px;
+		color: white;
+		display: none;
+		font-size: 12px;
+		left: 0;
+		margin: 0;
+		padding: 0;
+		position: fixed;
+		overflow: hidden;
+		text-transform: uppercase;
+		top: 36px;
+		width: 200px;
+		z-index: 9999;
+	}
+
+	#streamer-list .list-header {
+		border-bottom: 1px solid #222;
+		color: #777;
+		left: 0;
+		padding: 2px;
+		position: absolute;
+		right: 0;
+		top: 0;
+		width: auto;
+	}
+
+	#streamer-list .list-header:hover {
+		color: white;
+	}
+
+	#streamer-list ul {
+		cursor: pointer;
+		list-style: none;
+		overflow: hidden;
+		overflow-y: auto;
+		margin: 0;
+		padding: 0;
+		position: absolute;
+		top: 33px;
+		bottom: 0px;
+	}
+
+	#streamer-list li {
+		border-bottom: 1px solid #191919;
+		line-height: 1;
+		padding: 10px 15px;
+	}
+
+	#streamer-list li .view-count {
+		display: none;
+	}
+
+	#streamer-list.active {
+		display: block;
+	}
+
+	#streamer-list.active li {
+		display: block;
+	}
+
+	#streamer-list.active ul {
+		min-width: 200px;
+	}
+
+	#streamer-list.active li.selected {
+		color: orangered;
+	}
+
+	#streamer-list.active li:hover {
+		background: orangered;
+		color: white;
+	}
+
+	#streamer-list li.selected {
+		color: white;
+	}
+
+/* The Livestream */
+
+	#livestream {
+		margin: 0 auto;
+	}
+
+	#livestream object {
+		width: 100%;
+		height: 100%;
+	}
+
+	.stream-overlay {
+		position: fixed;
+		z-index: 3;
+		bottom: 60px;
+	}
+
+	.stream-overlay.fullsize {
+		bottom: 30px;
+	}
+
+/* The Sidebar */
+
+	#sidebar {
+		border-left: 1px solid #222;
+		bottom: 0;
+		position: absolute;
+		right: 0;
+		top: 0px;
+		width: 300px;
+	}
+
+	#sidebar .widget-header {
+		background: black;
+		border-bottom: 1px solid #222;
+		color: #ddd;
+		font-size: 14px;
+		line-height: 1.2em;
+		overflow: hidden;
+		padding: 10px;
+		text-transform: uppercase;
+	}
+
+	#sidebar .widget-body {
+		position: absolute;
+		top: 37px;
+	}
+
+	#sidebar .twitch-chat iframe {
+		height: 100% !important;
+	}
+
+/* Fullscreen Option */
+
+	.fullscreen-trigger {
+		position: fixed;
+		bottom: 30px;
+		right: 15px;
+		z-index: 99999;
+	}
+
+	.fullscreen-trigger .icon-expand {
+		display: block;
+	}
+
+	.fullscreen-trigger .icon-contract {
+		display: none;
+	}
+
+	.fullscreen-trigger.activate .icon-expand {
+		display: none;
+	}
+
+	.fullscreen-trigger.activate .icon-contract {
+		display: block;
+	}
+
+/* The Modals */
+
+	.modal-shader {
+		background: rgba(0,0,0,0.5);
+		display: none;
+		z-index: 999998;
+	}
+
+	.modal {
+		background: #111;
+		border: 3px solid rgba(255,255,255,0.2);
+		color: #ddd;
+		display: none;
+		font-size: 14px;
+		line-height: 21px;
+		padding: 20px;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		z-index: 999999;
+	}
+
+	.modal-shader.active,
+	.modal.active {
+		display: block;
+	}
+
+	.modal h3 {
+		color: white;
+		font-size: 18px;
+		font-weight: normal;
+		padding: 0;
+		margin: 0;
+		line-height: 1;
+		text-align: center;
+	}
+
+	.modal .modal-header {
+		border-bottom: 1px solid #333;
+		margin: 0px auto 20px;
+		padding: 0 0 20px;
+		width: auto;
+		text-align: center;
+	}
+
+	.modal6 {
+		width: 460px;
+		height: 300px;
+		margin: -200px 0px 0px -230px;
+	}
+
+	.window-help li {
+		overflow: hidden;
+		margin-bottom: 10px;
+	}
+
+	.window-help .instr {
+		display: inline-block;
+		font-size: 13px;
+		line-height: 1;
+		margin: 7px 0px;
+	}
+
+	.window-exit {
+		height: 162px;
+	}
+
+/* The Icons */
+
+	.icons-options i {
+		color: #666;
+		cursor: pointer;
+		display: inline-block;
+		font-size: 16px;
+		font-style: normal;
+		height: 16px;
+		line-height: 1em;
+		margin: 0px;
+		padding: 10px;
+		text-align: center;
+		min-width: 16px;
+	}
+
+	.icons-options i.text-icon {
+		font-size: 12px;
+		padding: 12px;
+	}
+
+	.icons-options i.full-wide {
+		left: 0;
+		position: absolute;
+		right: 0;
+	}
+
+	.icons-options.aligned-left i {
+		float: left;
+		margin-right: 10px;
+	}
+
+	.icons-options .icon-bg i {
+		background: rgba(0,0,0,0.7);
+	}
+
+	.icons-options .icon-bg-light i {
+		background: #262626;
+		color: #ccc;
+	}
+
+	.icons-options i.triggered {
+		background: #555;
+	}
+
+	.icons-options i:hover,
+	.icons-options .option.active-on i {
+		color: #fff;
+	}
+
+	.icons-options i.highlighted {
+		background: orangered;
+		color: white;
+	}
+
+	.icons-options i.highlighted:hover {
+		background: rgb(255, 102, 0);
+	}
+
+	.icons-options.tiny-icons i {
+		padding: 6px;
+	}
+
+	.debug.db-message {
+		background: #222;
+		color: white;
+		font-size: 15px;
+		left: 50%;
+		line-height: 1;
+		margin: -27px 0px 0px -75px;
+		padding: 20px;
+		position: absolute;
+		text-align: center;
+		text-transform: uppercase;
+		top: 50%;
+	}
+
+/* Player Races */
+
+	.player-race:after {
+		color: #666;
+		content: '';
+		font-weight: bold;
+		display: inline;
+		position: absolute;
+		right: 10px;
+	}
+
+	.player-race.race-terran:after {
+		content: '[ T ]';
+	}
+
+	.player-race.race-protoss:after {
+		content: '[ P ]';
+	}
+
+	.player-race.race-zerg:after {
+		content: '[ Z ]';
+	}
+
+	.player-race:hover:after {
+		color: black;
+	}
+
+/* Upcoming Features */
+
+/*	#streamer-search {
+		background: rgba(0,0,0,0.8);
+		width: 400px;
+		height: 200px;
+		position: fixed;
+		top: 50%;
+		left: 50%;
+		margin: -100px 0px 0px -200px;
+		display: none;
+		z-index: 99;
+	} */
+
+	#streamer-watching {
+		background: black;
+		color: white;
+		display: none;
+		font-size: 32px;
+		left: 50%;
+		margin: -110px 0px 0px -250px;
+		position: fixed;
+		top: 50%;
+		width: 400px;
+		z-index: 99;
+		padding: 50px;
+		text-align: center;
+		text-transform: uppercase;
+	}
+
+	#streamer-watching span {
+		display: block;
+		line-height: 38px;
+	}
+
+	#streamer-watching span.title {
+		color: #ddd;
+		font-size: 13px;
+	}
+
+/* The Media Queries */
+	@media all and (max-width : 680px) {
+		.watching .stream-title {
+			display: none;
+		}
+	}
