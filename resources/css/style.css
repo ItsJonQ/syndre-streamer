@@ -380,11 +380,11 @@
 	.stream-overlay {
 		position: fixed;
 		z-index: 3;
-		bottom: 30px;
+		bottom: 60px;
 	}
 
 	.stream-overlay.fullsize {
-		bottom: 0;
+		bottom: 30px;
 	}
 
 /* The Sidebar */
@@ -491,7 +491,7 @@
 	.modal6 {
 		width: 460px;
 		height: 300px;
-		margin: -15% 0px 0px -230px;
+		margin: -200px 0px 0px -230px;
 	}
 
 	.window-help li {
