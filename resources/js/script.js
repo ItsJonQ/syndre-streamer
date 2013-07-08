@@ -94,7 +94,7 @@ $(document).ready(function(){
 
 			watchOnTwitch.attr('href', 'http://www.twitch.tv/'+username);
 			modalExitClose();
-			
+
 		}
 
 		twitchChat = function() {
@@ -159,8 +159,10 @@ $(document).ready(function(){
 			theSidebar.toggleClass('hidden');
 			if(streamWrap.hasClass(sa)) {
 				fsTrigger.css('right', saNum + fsNum);
+				streamOverlay.css('right', saNum);
 			} else {
 				fsTrigger.css('right', fsNum);
+				streamOverlay.css('right', 0);
 			}
 		}
 
