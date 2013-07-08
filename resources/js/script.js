@@ -26,6 +26,7 @@ $(document).ready(function(){
 		streamWatching = $('#streamer-watching');
 		theModal = $('.modal');
 		theShade = $('.modal-shader');
+		streamOverlay = $('#stream-overlay');
 
 		fsTrigger = $('.fullscreen-trigger');
 
@@ -34,6 +35,8 @@ $(document).ready(function(){
 		iconRefresh = $('.option.refresh');
 		iconFS = $('.option.fullscreen');
 		iconHK = $('.option.hotkeys');
+
+		watchOnTwitch = $('#watch-on-twitch');
 
 		modalWindowHotkey = $('.window-help');
 			
@@ -89,6 +92,9 @@ $(document).ready(function(){
 				console.log('Twitch stream embed for '+username+' was successful.');
 			}
 
+			watchOnTwitch.attr('href', 'http://www.twitch.tv/'+username);
+			modalExitClose();
+			
 		}
 
 		twitchChat = function() {
@@ -168,6 +174,7 @@ $(document).ready(function(){
 			if(streamerList.hasClass('active')) {
 				streamerList.animate({ left: -(streamerListW+1) }, fsActionTime);
 			}
+			streamOverlay.addClass('fullsize');
 		}
 
 		fullscreenDectivate = function() {
@@ -180,6 +187,7 @@ $(document).ready(function(){
 			if(streamerList.hasClass('active')) {
 				streamerList.animate({ left: 0 }, fsActionTime);
 			}
+			streamOverlay.removeClass('fullsize');
 		}
 
 		fullscreenTrigger = function() {
@@ -199,6 +207,17 @@ $(document).ready(function(){
 			} else {
 				modalWindowHotkey.removeClass('active');
 				theShade.removeClass('active');
+			}
+		}
+
+		modalClose = function() {
+			theShade.removeClass('active');
+			theModal.removeClass('active');
+		}
+
+		modalExitClose = function() {
+			if($('.window-exit').hasClass('active')) {
+				modalClose();	
 			}
 		}
 
@@ -502,11 +521,19 @@ $(document).ready(function(){
 
 		iconHK.on('click', function(){
 			modalHotkey();
-		})
+		});
+
+		streamOverlay.on('click', function(){
+			$('.window-exit').addClass('active');
+			theShade.addClass('active');
+		});
+
+		$('#option-keep-watching').on('click', function(){
+			modalClose();
+		});
 
 		theShade.on('click', function(){
-			$(this).removeClass('active');
-			theModal.removeClass('active');
+			modalClose();
 		});
 
 		// exitPage();

@@ -1,4 +1,4 @@
-<div class="modal window-help fCaps">
+<div class="modal window-help modal6 fCaps">
 	<div class="row">
 		<div class="span6">
 			<div class="modal-header">
