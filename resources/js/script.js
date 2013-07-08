@@ -276,7 +276,7 @@ $(document).ready(function(){
 
 		// Embed the First User's Stream
 			first.addClass('selected');
-			streamInject(first, user_first, title_first);
+			// streamInject(first, user_first, title_first);
 			streamUserClick();
 
 		// Defining Key Press Functions
