@@ -10,6 +10,7 @@
 		<?php include('sidebar.php'); ?>
 	</div>
 	<div id="streamer-watching"></div>
+	<?php include('templates/modal-welcome.php'); ?>
 	<?php include('templates/modal-help.php'); ?>
 	<?php include('templates/modal-exit.php'); ?>
 <?php require('footer.php'); ?>

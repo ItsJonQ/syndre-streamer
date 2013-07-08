@@ -37,6 +37,7 @@ $(document).ready(function(){
 		iconHK = $('.option.hotkeys');
 
 		watchOnTwitch = $('#watch-on-twitch');
+		watchFirst = $('#icon-first-watch');
 
 		modalWindowHotkey = $('.window-help');
 			
@@ -57,7 +58,7 @@ $(document).ready(function(){
 					$.each(data,function(i, data) {
 						var user = data.channel.login;
 						var twitch_live_view_count = data.channel_count;
-						var stream_title = data.title;
+						var stream_title = escape(data.title);
 						streamerList.find('ul').append('<li id="'+twitch_live_view_count+'" data-user="'+user+'" data-stream-title="'+stream_title+'" class="'+user+'">'+user+'<span class="view-count">'+twitch_live_view_count+'</span></li>');
 					});
 				})
@@ -78,8 +79,6 @@ $(document).ready(function(){
 
 		twitchEmbed = function(username) {
 			var chatState = 'on'
-			if(streamWrap.hasClass('chat-active')) { var chatState = 'on'; }
-			history.pushState(null, null, '#!/user=' + username);
 			var start = '&auto_play=true';
 			var width = '1920';
 			var height = '1080';
@@ -113,6 +112,9 @@ $(document).ready(function(){
 		}
 
 		streamInject = function(ele, user, title) {
+			$('.window-welcome').removeClass('active');
+			if(streamWrap.hasClass('chat-active')) { var chatState = 'on'; }
+			history.pushState(null, null, '#!/user=' + user);
 			streamerLi.removeClass('selected');
 			ele.addClass('selected');
 			streamArea.html('');
@@ -121,7 +123,7 @@ $(document).ready(function(){
 			streamWrap.attr('data-twitch-title', title);
 			streamWatching.html('You Are Now Watching <span class="highlight-text">'+user+'</span>');
 			theHeader.find('.now-watching').html('Now Watching <span class="streamer highlight-text">'+user+'</span>: ');
-			theHeader.find('.stream-title').html(title)
+			theHeader.find('.stream-title').html(unescape(title));
 			setTimeout(function(){ twitchChat(); }, 50);
 		}
 
@@ -234,13 +236,13 @@ $(document).ready(function(){
 		playerRace = function() {
 
 			// Terran Players
-				var terran = '.avilo, .brentstarcraft, .colthestc, .demuslim, .dragon, .empiretvkas, .gamegene, .htomario, .joemanstarcraft, .liquidtaeja, .painuser, .mewby, .nathanias, .quanticflo, .s2sound, .selectkr, .squishy88, .sterlingkolde, .tumescentpie';
+				var terran = '.avilo, .azylis, .brentstarcraft, .colthestc, .demuslim, .dragon, .empiretvkas, .escgoody, .gamegene, .hobbiton, .htomario, .joemanstarcraft, .liquidtaeja, .lillekanin, .painuser, .mewby, .nathanias, .quanticflo, .s2sound, .selectkr, .squishy88, .sterlingkolde, .tumescentpie';
 
 			// Protoss Players
-				var protoss = '.artosis, .axeltoss, .colminigun, .crimson_sc2, .dreadnoughtt, .eghuk, .finalmastery, .followgrubby, .incontroltv, .istubby, .jushyfruit, .naniwasc2, .liquidhero, .kuroa1, .puckk, .tarrantius, .tetzui, .torkhots, .wayne379, .weedamins, .whitera';
+				var protoss = '.artosis, .axeltoss, .colminigun, .crimson_sc2, .dreadnoughtt, .eghuk, .finalmastery, .fiveyearold, .followgrubby, .incontroltv, .istubby, .jushyfruit, .naniwasc2, .liquidhero, .kuroa1, .puckk, .sc2sage, .tarrantius, .tetzui, .torkhots, .wayne379, .weedamins, .whitera';
 
 			// Zerg Players
-				var zerg = '.armzi, .bexysc, .dimaga, .empiretvpeptar, .empiretvzerg, .hurricane1234, .idrajit, .kawaiirice, .liquidsnute,  .liquidtlo, .massansc, .protech, .tilea, .wiredguitars';
+				var zerg = '.armzi, .bexysc, .dimaga, .empiretvpeptar, .empiretvzerg, .hurricane1234, .idrajit, .kawaiirice, .liquidsnute,  .liquidtlo, .massansc, .msspyte, .najzmajs, .protech, .tilea, .wiredguitars';
 
 			streamerList.find('li').each(function(){
 				if($(this).is(terran)) {
@@ -534,6 +536,15 @@ $(document).ready(function(){
 
 		$('#option-keep-watching').on('click', function(){
 			modalClose();
+		});
+
+		$('#icon-watch-first').on('click', function() {
+			var user = streamerList.find('li.selected');
+			var userID = user.data('user');
+			var title = user.data('stream-title');
+			streamerLi.blur();
+			user.focus();
+			streamInject(user, userID, title);
 		});
 
 		theShade.on('click', function(){

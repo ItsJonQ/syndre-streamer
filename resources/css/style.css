@@ -18,6 +18,11 @@
 		position: relative;
 	}
 
+	a {
+		color: white;
+		text-decoration: none;
+	}
+
 	ul,
 	li {
 		list-style: none;
@@ -26,7 +31,7 @@
 	}
 
 	p {
-		margin: 0px 0px 1.5em;
+		margin: 0px 0px 20px;
 	}
 
 	.left {
@@ -90,6 +95,11 @@
 
 	.fCenter {
 		text-align: center;
+	}
+
+	.text-large {
+		font-size: 28px;
+		line-height: 36px;
 	}
 
 /* The Wrapper */
@@ -490,7 +500,7 @@
 
 	.modal6 {
 		width: 460px;
-		height: 300px;
+		height: auto;
 		margin: -200px 0px 0px -230px;
 	}
 
@@ -506,9 +516,6 @@
 		margin: 7px 0px;
 	}
 
-	.window-exit {
-		height: 162px;
-	}
 
 /* The Icons */
 
