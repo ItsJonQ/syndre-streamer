@@ -83,7 +83,7 @@ $(document).ready(function(){
 			var start = '&auto_play=true';
 			var width = '1920';
 			var height = '1080';
-			var twitch_stream = '<div class="livestream-embed pos-abso"><object type="application/x-shockwave-flash" height="'+height+'" width="'+width+'" id="live_embed_player_flash" data="http://www.twitch.tv/widgets/live_embed_player.swf?channel=mlgsc2" bgcolor="#000000"><param name="allowFullScreen" value="true" /><param name="allowScriptAccess" value="always" /><param name="allowNetworking" value="all" /><param name="movie" value="http://www.twitch.tv/widgets/live_embed_player.swf" /><param name="flashvars" value="hostname=www.twitch.tv&channel='+username+start+'" /></object></div>';
+			var twitch_stream = '<div class="livestream-embed pos-abso"><object type="application/x-shockwave-flash" height="'+height+'" width="'+width+'" id="live_embed_player_flash" data="http://www.twitch.tv/widgets/live_embed_player.swf?channel='+username+'" bgcolor="#000000"><param name="allowFullScreen" value="true" /><param name="allowScriptAccess" value="always" /><param name="allowNetworking" value="all" /><param name="movie" value="http://www.twitch.tv/widgets/live_embed_player.swf" /><param name="flashvars" value="hostname=www.twitch.tv&channel='+username+start+'" /></object></div>';
 			
 			if(debugMode == false) {
 				streamArea.append(twitch_stream);
@@ -234,13 +234,13 @@ $(document).ready(function(){
 		playerRace = function() {
 
 			// Terran Players
-				var terran = '.avilo, .brentstarcraft, .colthestc, .demuslim, .dragon, .gamegene, .htomario, .liquidtaeja, .painuser, .nathanias, .quanticflo, .s2sound, .selectkr, .squishy88, .sterlingkolde, .tumescentpie';
+				var terran = '.avilo, .brentstarcraft, .colthestc, .demuslim, .dragon, .gamegene, .htomario, .liquidtaeja, .painuser, .mewby, .nathanias, .quanticflo, .s2sound, .selectkr, .squishy88, .sterlingkolde, .tumescentpie';
 
 			// Protoss Players
-				var protoss = '.axeltoss, .crimson_sc2, .dreadnoughtt, .eghuk, .finalmastery, .followgrubby, .incontroltv, .naniwasc2, .liquidhero, .kuroa1, .puckk, .tarrantius, .tetzui, .torkhots, .wayne379, .weedamins, .whitera';
+				var protoss = '.artosis, .axeltoss, .colminigun, .crimson_sc2, .dreadnoughtt, .eghuk, .finalmastery, .followgrubby, .incontroltv, .istubby, .jushyfruit, .naniwasc2, .liquidhero, .kuroa1, .puckk, .tarrantius, .tetzui, .torkhots, .wayne379, .weedamins, .whitera';
 
 			// Zerg Players
-				var zerg = '.armzi, .bexysc, .dimaga, .empiretvpeptar, .empiretvzerg, .idrajit, .kawaiirice, .liquidtlo, .massansc, .protech, .tilea, .wiredguitars';
+				var zerg = '.armzi, .bexysc, .dimaga, .empiretvpeptar, .empiretvzerg, .hurricane1234, .idrajit, .kawaiirice, .liquidtlo, .massansc, .protech, .tilea, .wiredguitars';
 
 			streamerList.find('li').each(function(){
 				if($(this).is(terran)) {
@@ -433,13 +433,15 @@ $(document).ready(function(){
 					}
 
 				// "R" for Refresh List
-					if(debugMode == true) {
-						if(e.keyCode == 82) {
-							if(streamerList.hasClass('active')) {
-								streamListRefresh();
-							}
+					if(e.keyCode == 82) {
+						if(streamerList.hasClass('active')) {
+							streamListRefresh();
 						}
-					}
+						if(modalWindowHotkey.hasClass('active')) {
+							$('#key-r').addClass('triggered');
+						}
+						if(debugMode == true) { console.log('Stream has refreshed.'); }
+					}	
 					
 				// "F" for Fullscreen Mode
 					if(e.keyCode == 70) {
@@ -525,7 +527,7 @@ $(document).ready(function(){
 			modalHotkey();
 		});
 
-		streamOverlay.on('click', function(){
+		streamOverlay.on('dblclick', function(){
 			$('.window-exit').addClass('active');
 			theShade.addClass('active');
 		});
