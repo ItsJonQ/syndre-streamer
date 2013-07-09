@@ -4,6 +4,7 @@
 		</div>	
 	</div>
 	<div class="modal-shader pos-abso"></div>
+	<div id="static" class="pos-abso"></div>
 	<!-- <div id="stream-overlay" class="stream-overlay pos-abso"></div> -->
 	<script> 
 		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

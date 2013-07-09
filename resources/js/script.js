@@ -40,6 +40,7 @@ $(document).ready(function(){
 		watchFirst = $('#icon-first-watch');
 
 		modalWindowHotkey = $('.window-help');
+		modalWinIC = $('.window-init-close');
 			
 	// Reserving Functions and Features for Desktop Only
 	if(theBody.hasClass('desktop')) {
@@ -112,9 +113,9 @@ $(document).ready(function(){
 		}
 
 		streamInject = function(ele, user, title) {
-			$('.window-welcome').removeClass('active');
+			modalWinIC.removeClass('active');
 			if(streamWrap.hasClass('chat-active')) { var chatState = 'on'; }
-			history.pushState(null, null, '#!/user=' + user);
+			history.pushState(null, null, '?user=' + user);
 			streamerLi.removeClass('selected');
 			ele.addClass('selected');
 			streamArea.html('');
@@ -205,6 +206,7 @@ $(document).ready(function(){
 		}
 
 		modalHotkey = function() {
+			modalWinIC.removeClass('active');
 			if(!modalWindowHotkey.hasClass('active')) {
 				modalWindowHotkey.addClass('active');
 				theShade.addClass('active');
@@ -236,31 +238,73 @@ $(document).ready(function(){
 		playerRace = function() {
 
 			// Terran Players
-				var terran = '.avilo, .azylis, .brentstarcraft, .colthestc, .demuslim, .dragon, .empiretvkas, .escgoody, .gamegene, .hobbiton, .htomario, .joemanstarcraft, .liquidtaeja, .lillekanin, .painuser, .mewby, .nathanias, .quanticflo, .s2sound, .selectkr, .squishy88, .sterlingkolde, .tumescentpie';
+				var terran = '.avilo, .azylis, .brentstarcraft, .coltertv, .colthestc, .demuslim, .dragon, .empiretvkas, .escgoody, .gamegene, .hobbiton, .htomario, .joemanstarcraft, .liquidtaeja, .lillekanin, .painuser, .mewby, .mfiaguz, .nathanias, .quanticflo, .s2sound, .selectkr, .squishy88, .sterlingkolde, .tumescentpie';
 
 			// Protoss Players
-				var protoss = '.artosis, .axeltoss, .colminigun, .crimson_sc2, .dreadnoughtt, .eghuk, .finalmastery, .fiveyearold, .followgrubby, .incontroltv, .istubby, .jushyfruit, .naniwasc2, .liquidhero, .kuroa1, .puckk, .sc2sage, .tarrantius, .tetzui, .torkhots, .wayne379, .weedamins, .whitera';
+				var protoss = '.artosis, .axeltoss, .colminigun, .crimson_sc2, .dreadnoughtt, .eghuk, .finalmastery, .fiveyearold, .followgrubby, .incontroltv, .istubby, .jushyfruit, .justsimpletv, .kuroa1, .liquidhero,  .puckk, .naniwasc2, .sc2sage, .shew_tv, .slavismoon, .tarrantius, .tetzui, .torkhots, .wayne379, .weedamins, .whitera';
 
 			// Zerg Players
-				var zerg = '.armzi, .bexysc, .dimaga, .empiretvpeptar, .empiretvzerg, .hurricane1234, .idrajit, .kawaiirice, .liquidsnute,  .liquidtlo, .massansc, .msspyte, .najzmajs, .protech, .tilea, .wiredguitars';
+				var zerg = '.armzi, .bexysc, .dimaga, .empiretvpeptar, .empiretvzerg, .grinkersstarcraft, .hurricane1234, .idrajit, .kawaiirice, .liquidsnute,  .liquidtlo, .massansc, .msspyte, .najzmajs, .rootcatz, .protech, .tilea, .wiredguitars';
 
 			streamerList.find('li').each(function(){
 				if($(this).is(terran)) {
 					$(this).addClass('player-race race-terran');
-					if(debugMode == true) { console.log('Terran player was identified.'); }
+					if(superDebugMode == true) { console.log('Terran player was identified.'); }
 				}
 				if($(this).is(protoss)) {
 					$(this).addClass('player-race race-protoss');
-					if(debugMode == true) { console.log('Protoss player was identified.'); }
+					if(superDebugMode == true) { console.log('Protoss player was identified.'); }
 				}
 				if($(this).is(zerg)) {
 					$(this).addClass('player-race race-zerg');
-					if(debugMode == true) { console.log('Zerg player was identified.'); }
+					if(superDebugMode == true) { console.log('Zerg player was identified.'); }
 				}
 			})
 
 			if(debugMode == true) { console.log('Player race filter activated.'); }
 
+		}
+
+		urlParamUserCheck = function() {
+
+			// Create function to get URL Parameters
+				var getUrlParam = function(key){
+					var theUrl = window.location;
+					var result = new RegExp(key + "=([^&]*)", "i").exec(window.location.search); 
+					return result && unescape(result[1]) || ""; 
+				};
+				var user = getUrlParam('user');
+
+			// Check and validate the URL parameter for "user"
+				if(user != '') {
+					var userClass = '.'+user;
+					var userLi = streamerList.find(userClass);
+					if(userLi.length) {
+						var userTitle = streamerList.find(userClass).data('stream-title');
+						streamInject(userLi, user, userTitle);
+						if(debugMode == true) { console.log(user+' was identified via url parameter.'); }
+					} else {
+						var wSO = $('.window-streamer-offline');
+						theModal.removeClass('active');
+						wSO.find('.uh-oh-user').html(user);
+						wSO.addClass('active');
+						if(debugMode == true) { console.log(user+' was not identified via url parameter.'); }
+					}
+				} else {
+
+				// Get The First User's Information
+					var first = streamerList.find('li').first();
+					var user_first = first.data('user');
+					var title_first = first.data('stream-title');
+
+				// Embed the First User's Stream
+					first.addClass('selected');
+					// streamInject(first, user_first, title_first);
+					streamUserClick();
+
+				// Activate Welcome Window
+					$('.window-welcome').addClass('active');
+				}
 		}
 
 	// Load Sequence Functions
@@ -270,16 +314,8 @@ $(document).ready(function(){
 			var loadTime = new Date();
 			console.log('Window has loaded successfully. ('+ (loadTime - initialLoadTime) + 'ms)'); 
 		}
-
-		// Get The First User's Information
-			var first = streamerList.find('li').first();
-			var user_first = first.data('user');
-			var title_first = first.data('stream-title');
-
-		// Embed the First User's Stream
-			first.addClass('selected');
-			// streamInject(first, user_first, title_first);
-			streamUserClick();
+		
+		urlParamUserCheck();
 
 		// Defining Key Press Functions
 			var streamListUserReset = function() {
@@ -292,7 +328,10 @@ $(document).ready(function(){
 
 			var scrollOffset = function(direction){
 				var a = streamerList.find('li.selected');
+				var as = streamerList.find('li').size() * streamerList.find('li').outerHeight();
 				var b = streamerList.find('ul');
+				var r = streamerList.find('.list-reset').height();
+				var br = b.height() - r;
 				var p = a.prevAll();
 				var ps = p.size();
 				var h = 32;
@@ -305,11 +344,13 @@ $(document).ready(function(){
 						if(debugMode == true) { console.log('Scroll offset "Up - Reset" was successful.'); }
 					}
 				} else if (direction == 'down') {
-					if( a.offset().top > b.height()) {
+					if( a.offset().top > br) {
 						scrollCounter++;
 						b.scrollTop(h * scrollCounter);
 						if(debugMode == true) { console.log('Scroll offset "Down" was successful.'); }
 					}
+				} else if (direction == 'reset') {
+					b.scrollTop(ps * a.outerHeight());
 				} else {
 					return false;
 				}
@@ -386,6 +427,7 @@ $(document).ready(function(){
 						streamerLi.blur();
 						iconMenu.addClass('active-on');
 						streamerList.addClass('active');
+						// scrollOffset('reset');
 					}
 
 				// "Left" / "A" to Hide Stream Menu
@@ -489,21 +531,25 @@ $(document).ready(function(){
 
 	// Defining Mouse Action Functions
 
+		var streamerListMouseTimeout = null;
 		streamerList.on('mouseenter',function(){
 			$(this).addClass('active');
 			iconMenu.addClass('active-on');
+			clearTimeout(streamerListMouseTimeout);
 		});
 
 		if(debugMode == false) {
-			streamArea.on('mouseenter',function(){
-				streamerList.removeClass('active');
-			});
-
 			streamerList.on('mouseleave',function(){
-				$(this).removeClass('active');
-				iconMenu.removeClass('active-on');
+				streamerListMouseTimeout = setTimeout(function(){
+					streamerList.removeClass('active');
+					iconMenu.removeClass('active-on');
+				}, 500);
 			});
-		}		
+		}
+
+		streamWrap.on('click', function(){
+			modalWinIC.removeClass('active');
+		});
 
 		iconMenu.on('click',function(){
 			$(this).toggleClass('active-on');
@@ -538,10 +584,11 @@ $(document).ready(function(){
 			modalClose();
 		});
 
-		$('#icon-watch-first').on('click', function() {
-			var user = streamerList.find('li.selected');
+		$('.watch-first-click').on('click', function() {
+			var user = streamerList.find('li').first();
 			var userID = user.data('user');
 			var title = user.data('stream-title');
+			console.log(user);
 			streamerLi.blur();
 			user.focus();
 			streamInject(user, userID, title);

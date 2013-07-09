@@ -97,6 +97,10 @@
 		text-align: center;
 	}
 
+	.fItal {
+		font-style: italic;
+	}
+
 	.text-large {
 		font-size: 28px;
 		line-height: 36px;
@@ -106,6 +110,7 @@
 
 	#stream-wrapper {
 		top: 36px;
+		z-index: 2;
 	}
 
 	#stream-wrapper.sidebar-active #livestream {
@@ -400,6 +405,7 @@
 /* The Sidebar */
 
 	#sidebar {
+		background: black;
 		border-left: 1px solid #222;
 		bottom: 0;
 		position: absolute;
@@ -659,6 +665,12 @@
 	#streamer-watching span.title {
 		color: #ddd;
 		font-size: 13px;
+	}
+
+/* The Static */
+	#static {
+		background: url('../images/static.gif');
+		opacity: 0.15;
 	}
 
 /* The Media Queries */
