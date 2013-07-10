@@ -9,8 +9,8 @@
 		<div class="header-ele icons-options right">
 			<div class="option chat action right sep"><i class="icon-bubble" title="Toggle Stream Chat"></i></div>
 			<div class="option hotkeys action right sep"><i class="text-icon" title="Show Syndre Hotkeys">Hotkeys</i></div>
-			<div class="option action game-switch right sep"><a href="/#!/lol" target="_blank"><i class="text-icon" title="Watch League of Legends">LoL</i></a></div>
-			<div class="option action game-switch right sep"><a href="/#" target="_blank"><i class="text-icon" title="Show Syndre Hotkeys">SC2</i></a></div>
+			<div class="option action game-switch right sep"><a href="/?game=lol"><i class="text-icon" title="Watch League of Legends">LoL</i></a></div>
+			<div class="option action game-switch right sep"><a href="http://<?php echo $_SERVER[SERVER_NAME]; ?>/"><i class="text-icon" title="Show Syndre Hotkeys">SC2</i></a></div>
 		</div>	
 	</div>
 </header>
