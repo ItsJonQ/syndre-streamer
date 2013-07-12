@@ -5,6 +5,19 @@ $(document).ready(function(){
 	var initialLoadTime = new Date();
 	urlPathname = window.location.href;
 
+	getUrlParam = function(key){
+	var theUrl = window.location;
+	var paramResult = new RegExp(key + "=([^&]*)", "i").exec(window.location.search); 
+		return paramResult && unescape(paramResult[1]) || ""; 
+	};
+
+	debugModeVal = getUrlParam('dbmode');
+	if(debugModeVal == 'expert') {
+		debugMode = true;
+	} else if (debugModeVal == 'super') {
+		superDebugMode = true;
+	}
+
 	// Debug Mode
 		// superDebugMode = true;
 		// debugMode = true;
@@ -304,6 +317,7 @@ $(document).ready(function(){
 
 				// Activate Welcome Window
 					$('.window-welcome').addClass('active');
+					streamerList.addClass('active');
 				}
 		}
 
