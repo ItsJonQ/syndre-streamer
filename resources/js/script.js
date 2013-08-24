@@ -251,13 +251,13 @@ $(document).ready(function(){
 		playerRace = function() {
 
 			// Terran Players
-				var terran = '.avilo, .azylis, .brentstarcraft, .coltertv, .colthestc, .demuslim, .dragon, .empiretvkas, .eric1826, .escgoody, .gamegene, .ganzi, .hobbiton, .htomario, .joemanstarcraft, .liquidtaeja, .lillekanin, .painuser, .mewby, .mfiaguz, .nathanias, .quanticflo, .s2sound, .selectkr, .squishy88, .sterlingkolde, .tumescentpie';
+				var terran = '.avilo, .azylis, .brentstarcraft, .coltertv, .colthestc, .demuslim, .dragon, .egxeno, .empiretvkas, .eric1826, .escgoody, .gamegene, .ganzi, .hobbiton, .htomario, .joemanstarcraft, .liquidtaeja, .lillekanin, .luisggg, .mewby, .mfiaguz, .nathanias, .painuser, .quanticflo, .ruff13, .s2sound, .selectkr, .squishy88, .sterlingkolde, .tumescentpie, .xeloxy';
 
 			// Protoss Players
-				var protoss = '.artosis, .axeltoss, .colminigun, .crimson_sc2, .desrowfighting, .dreadnoughtt, .eghuk, .finalmastery, .fiveyearold, .followgrubby, .incontroltv, .istubby, .jushyfruit, .justsimpletv, .kuroa1, .liquidhero,  .puckk, .oraseno_snowm, .naniwasc2, .sc2pal, .sc2sage, .schmuzi, .shew_tv, .slavismoon, .snykes, .tarrantius, .tetzui, .torkhots, .wayne379, .weedamins, .welmu1, .whitera';
+				var protoss = '.artosis, .axeltoss, .colminigun, .crimson_sc2, .desrowfighting, .dreadnoughtt, .eghuk, .finalmastery, .fiveyearold, .followgrubby, .incontroltv, .istubby, .jushyfruit, .justsimpletv, .kuroa1, .liquidhero,  .puckk, .oraseno_snowm, .naniwasc2, .rohdarkness, .sc2pal, .sc2sage, .schmuzi, .shew_tv, .slavismoon, .snykes, .tarrantius, .tetzui, .torkhots, .wayne379, .weedamins, .welmu1, .whitera';
 
 			// Zerg Players
-				var zerg = '.armzi, .bexysc, .dimaga, .empiretvpeptar, .empiretvzerg, .grinkersstarcraft, .hurricane1234, .idrajit, .kawaiirice, .liquidsnute,  .liquidtlo, .massansc, .msspyte, .najzmajs, .rootcatz, .protech, .tilea, .wiredguitars';
+				var zerg = '.armzi, .bexysc, .coolagebrothers, .dimaga, .empiretvpeptar, .empiretvzerg, .grinkersstarcraft, .hurricane1234, .idrajit, .kawaiirice, .liquidsnute,  .liquidtlo, .massansc, .msspyte, .namshar, .najzmajs, .rootcatz, .protech, .tilea, .wiredguitars';
 
 			streamerList.find('li').each(function(){
 				if($(this).is(terran)) {
@@ -375,6 +375,7 @@ $(document).ready(function(){
 
 				// "Up" / "W" for Previous
 					if(e.keyCode == 38 || e.keyCode == 87) {
+						e.preventDefault();
 						if(modalWindowHotkey.hasClass('active')) {
 							if(e.keyCode == 38) {
 								$('#key-up').addClass('triggered');
@@ -402,6 +403,7 @@ $(document).ready(function(){
 
 				// "Down" / "S" for Next
 					if(e.keyCode == 40 || e.keyCode == 83) {
+						e.preventDefault();
 						if(modalWindowHotkey.hasClass('active')) {
 							if(e.keyCode == 40) {
 								$('#key-down').addClass('triggered');
@@ -426,23 +428,23 @@ $(document).ready(function(){
 						}
 					}
 
-				// "Right" / "D" to Show Stream Menu
-					if(e.keyCode == 39 || e.keyCode == 68) {
-						if(modalWindowHotkey.hasClass('active')) {
-							if(e.keyCode == 39) {
-								$('#key-right').addClass('triggered');
-							}
+				// // "Right" / "D" to Show Stream Menu
+				// 	if(e.keyCode == 39 || e.keyCode == 68) {
+				// 		if(modalWindowHotkey.hasClass('active')) {
+				// 			if(e.keyCode == 39) {
+				// 				$('#key-right').addClass('triggered');
+				// 			}
 
-							if(e.keyCode == 68) {
-								$('#key-d').addClass('triggered');
-							}
-						}
-						// streamListUserReset();
-						streamerLi.blur();
-						iconMenu.addClass('active-on');
-						streamerList.addClass('active');
-						// scrollOffset('reset');
-					}
+				// 			if(e.keyCode == 68) {
+				// 				$('#key-d').addClass('triggered');
+				// 			}
+				// 		}
+				// 		// streamListUserReset();
+				// 		streamerLi.blur();
+				// 		iconMenu.addClass('active-on');
+				// 		streamerList.addClass('active');
+				// 		// scrollOffset('reset');
+				// 	}
 
 				// "Left" / "A" to Hide Stream Menu
 					if(e.keyCode == 37 || e.keyCode == 65) {
@@ -457,8 +459,8 @@ $(document).ready(function(){
 						}
 						// streamListUserReset();
 						streamerLi.blur();
-						iconMenu.removeClass('active-on');
-						streamerList.removeClass('active scroll').css('left', 0);
+						iconMenu.toggleClass('active-on');
+						streamerList.toggleClass('active scroll').css('left', 0);
 					}
 
 				// "Enter" / "E" to Activate Selected User's Stream
