@@ -251,13 +251,13 @@ $(document).ready(function(){
 		playerRace = function() {
 
 			// Terran Players
-				var terran = '.avilo, .azylis, .brentstarcraft, .coltertv, .colthestc, .demuslim, .dragon, .egxeno, .empiretvkas, .eric1826, .escgoody, .gamegene, .ganzi, .hobbiton, .htomario, .joemanstarcraft, .liquidtaeja, .lillekanin, .luisggg, .mewby, .mfiaguz, .nathanias, .painuser, .quanticflo, .ruff13, .s2sound, .selectkr, .squishy88, .sterlingkolde, .tumescentpie, .xeloxy';
+				var terran = '.avilo, .azylis, .brentstarcraft, .coltertv, .colthestc, .demuslim, .dragon, .egxeno, .empiretvkas, .eric1826, .escgoody, .gamegene, .ganzi, .hobbiton, .htomario, .joemanstarcraft, .koibu, .liquidtaeja, .lillekanin, .luisggg, .mewby, .mfiaguz, .nathanias, .painuser, .quanticflo, .ruff13, .s2sound, .selectkr, .squishy88, .sterlingkolde, .tumescentpie, .xeloxy';
 
 			// Protoss Players
-				var protoss = '.artosis, .axeltoss, .colminigun, .crimson_sc2, .desrowfighting, .dreadnoughtt, .eghuk, .finalmastery, .fiveyearold, .followgrubby, .incontroltv, .istubby, .jushyfruit, .justsimpletv, .kuroa1, .liquidhero,  .puckk, .oraseno_snowm, .naniwasc2, .rohdarkness, .sc2pal, .sc2sage, .schmuzi, .shew_tv, .slavismoon, .snykes, .tarrantius, .tetzui, .torkhots, .wayne379, .weedamins, .welmu1, .whitera';
+				var protoss = '.artosis, .axeltoss, .colminigun, .crimson_sc2, .desrowfighting, .dreadnoughtt, .eghuk, .finalmastery, .fiveyearold, .followgrubby, .incontroltv, .istubby, .jushyfruit, .justsimpletv, .kuroa1, .liquidhero,  .puckk, .oraseno_snowm, .naniwasc2, .rohdarkness, .sc2pal, .sc2sage, .schmuzi, .shew_tv, .slavismoon, .snykes, .tarrantius, .tetzui, .theshrimpzor, .tokisadafuz, .torkhots, .wayne379, .weedamins, .welmu1, .whitera';
 
 			// Zerg Players
-				var zerg = '.armzi, .bexysc, .coolagebrothers, .dimaga, .empiretvpeptar, .empiretvzerg, .grinkersstarcraft, .hurricane1234, .idrajit, .kawaiirice, .liquidsnute,  .liquidtlo, .massansc, .msspyte, .namshar, .najzmajs, .rootcatz, .protech, .tilea, .wiredguitars';
+				var zerg = '.armzi, .bexysc, .coolagebrothers, .conniech, .dimaga, .edgesc, .empiretvpeptar, .empiretvzerg, .grinkersstarcraft, .hurricane1234, .idrajit, .kawaiirice, .liquidsnute,  .liquidtlo, .massansc, .msspyte, .namshar, .najzmajs, .nenshoua, .rootcatz, .protech, .tilea, .viruswhite, .wiredguitars, .wwminiraser';
 
 			streamerList.find('li').each(function(){
 				if($(this).is(terran)) {
